@@ -16,12 +16,36 @@
             "Grupo": "1"
         }
     },
-    "Trainer": {},
+    "Trainer": {
+        "6654": {
+            "Nombre": "MAR",
+            "Apellidos": "SD",
+            "Direccion": "ASDD",
+            "Telefono": {
+                "Fijo": "15",
+                "Movil": "15"
+            },
+            "Ruta": "No asignado"
+        }
+    },
     "Rutas": {
         "Ruta NodeJS": {},
         "Ruta Java": {
             "U1": {
-                "Módulos": {}
+                "Módulos": {
+                    "Fundamentos de programacion": [
+                        "Introducción a la algoritmia",
+                        "PSeInt",
+                        "Python"
+                    ],
+                    "Fundamentos web": [
+                        "HTML",
+                        "CSS",
+                        "Bootstrap"
+                    ]
+                },
+                "Salon": "Artemis",
+                "Hora": "6pm-10pm"
             }
         },
         "Ruta NetCore": {}

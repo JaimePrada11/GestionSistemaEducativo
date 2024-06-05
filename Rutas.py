@@ -1,6 +1,4 @@
 import Cargar_Guardar_datos as Datos
-import Horarios
-import datetime
 
 def rutas():
     Datos.cargar_datos()
@@ -48,6 +46,7 @@ def mostrar_grupo_ruta():
         else:
             print("No se seleccionó ningún grupo.")
             return None
+        
 
 def Nueva_Ruta():
     Datos.cargar_datos()
@@ -109,25 +108,20 @@ def ver_modulos():
     for i, mod in enumerate(Datos.modulos_skills, 1):
         if i == opc:
             mod_seleccionado = {}
-            for modulo_nombre, info_modulo in mod.items():
+            for modulo_nombre, tecnologias in mod.items():
                 print(f"Modulo: {modulo_nombre}")
                 print("Tecnologías:")
                 if modulo_nombre == "Bases de datos":
                     sgdb_seleccionados = Seleccionar_SGDB()
                     mod_seleccionado[modulo_nombre] = sgdb_seleccionados
                 else:
-                    for tecnologia in info_modulo["Tecnologías"]:
+                    for tecnologia in tecnologias:
                         print(f"- {tecnologia}")
-                    
-                    inicio, fin = Horarios.solicitar_fechas()
-                    info_modulo["Inicio"] = inicio.strftime("%Y-%m-%d")
-                    info_modulo["Fin"] = fin.strftime("%Y-%m-%d")
-                    
-                    mod_seleccionado[modulo_nombre] = info_modulo
-            
+                    mod_seleccionado[modulo_nombre] = tecnologias
             return mod_seleccionado
-    
+
     return None
+
 
 def Agregar_modulos_ruta():
     Datos.cargar_datos()

@@ -56,6 +56,7 @@ def Agregar_Ruta_trainer():
             if grupo_seleccionado:
                 Datos.Informacion["Trainer"][cedula]["Ruta"] = Ruta
                 Datos.Informacion["Trainer"][cedula]["Grupo"] = grupo_seleccionado[1]
+                Datos.Informacion["Trainer"][cedula]["Notas"] = {}
                 print(f"El Trainer de cédula {cedula} se asignó al grupo {grupo_seleccionado[1]} en la ruta {Ruta}.")
             else:
                 print("No se asignó ningún grupo al Camper.")

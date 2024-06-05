@@ -6,18 +6,20 @@ import Rutas
 import Gestion_Camper as camper
 import Reportes 
 import Horarios
+import Trainer_notas as notas
 Opc_Roles = ("1. Candidato", "2. Camper", "3. Trainer", "4. Coordinador", "5. Cerrar sesion")
 
 Opc_Candidato =("1. Registarse", "2. Informacion Personal", "3. Ver Estado", "4. Volver al Menu principal")
 Opc_Camper =("1. Informacion Personal", "2. Informacion del curso", "3. Estado de Riesgo", "4. Volver al Menu principal")
 Opc_Trainer =("1. Ver Datos", "2. Rutas asignadas", "3. Notas", "4. Menu Anterior")
-Opc_Coordinador =("1. Modificar estado", "2. Matricula", "3. Reportes")
-Opc_matricula=("1. Registrar trainer", "2. Crear ruta de entrenamiento", "3. Crear grupo", "4. Asignar Ruta/Grupo", "5. Asignar Salon y horario", "6. Menu Anterior")
+Opc_Coordinador =("1. Modificar estado", "2. Matricula", "3. Reportes", "4. Menu anterior")
+Opc_matricula=("1. Registrar trainer", "2. Crear ruta de entrenamiento", "3. Crear grupo", "4. Asignar Ruta/Grupo ", "5. Asignar modulos ", "6. Asignar Salon y horario", "7. Menu Anterior")
 opc_asignar = ("1. Camper", "2. Trainer", "3. Menu anterior")
 opc_reportes =("1. Campers inscritos", "2. Campers aprobados", "3. Trainers activos", "4. Campers bajo rendimiento", "5. Campers y trainer por ruta", "6. Reporte del modulo")
 
 def menu_coordinador():
     print("********")
+    print("Bienvenidao Coordinador")
     while True:
         print("Selecciona ----->")
         for i in Opc_Coordinador:
@@ -61,9 +63,9 @@ def menu_matricula():
             elif opc_c == 4:
                 menu_asignar()    
             elif opc_c == 5:
-                Horarios.asignar_hora_salon()   
+                Rutas.Agregar_modulos_ruta() 
             elif opc_c == 6:
-                print("")                                   
+                Horarios.asignar_hora_salon()                                    
             else:
                 print("Opcion Invalida")
             print("*********")
@@ -79,8 +81,8 @@ def menu_asignar():
         except ValueError:
             print("Dato incorrecto")
         else:
-            if opc_c == len(Opc_Candidato):
-                return menu_matricula
+            if opc_c == len(opc_asignar):
+                return menu_matricula()
             elif opc_c == 1:
                 camper.Agregar_Ruta_camper()
             elif opc_c == 2:
@@ -119,6 +121,8 @@ def menu_reportes():
 
 def menu_candidato():
     print("********")
+    print("Bienvenidao Candidato")
+    print("********")
     while True:
         print("Selecciona ----->")
         for i in Opc_Candidato:
@@ -143,6 +147,9 @@ def menu_candidato():
 
 def menu_camper():
     print("********")
+    print("Bienvenidao Camper")
+    print("********")
+
     while True:
         print("Selecciona ----->")
         for i in Opc_Camper:
@@ -164,21 +171,26 @@ def menu_camper():
 
 def menu_trainer():
     print("********")
+    print("Bienvenidao Trainer")
+    print("********")
+
     while True:
         print("Selecciona ----->")
-        for i in Opc_Camper:
+        for i in Opc_Trainer:
             print(i)
         try:
             opc_c = int(input("Ingresa la opcion: "))
         except ValueError:
             print("Dato incorrecto")
         else:
-            if opc_c == len(Opc_Camper):
+            if opc_c == len(Opc_Trainer):
                 return
             elif opc_c == 1:
                 info.ver_informacion("Trainer")
             elif opc_c == 2:
                 Ver_Estado()
+            elif opc_c==3:
+                notas.calificar_modulo()
             else:
                 print("Opcion Invalida")
             print("*********")  

@@ -24,7 +24,6 @@ def Trabajos_Clase():
     else:
         Nota=int(input("Ingresa el valor de la nota"))
         Nota_final = Nota * 0.1
-    print(Nota_final)
     return Nota_final
 
 
@@ -42,12 +41,10 @@ def Ingresar_Nota():
 def calificar_modulo():
     Datos.cargar_datos()
 
-    # Mostrar las rutas disponibles
     print("Las rutas de entrenamiento disponibles son:")
     for i, ruta in enumerate(Datos.Informacion["Rutas"], 1):
         print(f"{i}. {ruta}")
 
-    # Seleccionar la ruta
     try:
         opc_ruta = int(input("Selecciona la ruta para calificar los módulos: "))
         if 1 <= opc_ruta <= len(Datos.Informacion["Rutas"]):
@@ -78,12 +75,16 @@ def calificar_modulo():
         print("El grupo seleccionado no tiene módulos para calificar.")
         return
 
-    modulos_grupo = Datos.Informacion["Rutas"][ruta_seleccionada][grupo_seleccionado]["Módulos"]
-    for modulo, tecnologias in modulos_grupo.items():
-        print(f"Calificando módulo '{modulo}':")
-        for tecnologia in tecnologias:
-            print(f"Calificación para '{tecnologia}':")
-            calificacion = Ingresar_Nota()
+    while True:  
+        modulos_grupo = Datos.Informacion["Rutas"][ruta_seleccionada][grupo_seleccionado]["Módulos"]
+        for modulo, tecnologias in modulos_grupo.items():
+            print(f"Calificando módulo '{modulo}':")
+            for tecnologia in tecnologias:
+                print(f"Calificación para '{tecnologia}':")
+                calificacion = Ingresar_Nota()
 
+        respuesta = input("¿Desea seguir calificando otra nota? (s/n): ")
+        if respuesta.lower() != 's':
+            break
 
     print("Calificación completada.")
