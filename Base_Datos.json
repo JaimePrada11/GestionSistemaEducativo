@@ -1,0 +1,29 @@
+{
+    "Candidato": {},
+    "Camper": {
+        "123456": {
+            "Nombre": "Andres",
+            "Apellidos": "Prada",
+            "Direccion": "cra 15",
+            "Acudiente": "sonia",
+            "Telefono": {
+                "Fijo": "6011778698",
+                "Movil": "3014"
+            },
+            "Estado": "Aprobado",
+            "Ruta": "Ruta Java",
+            "Riesgo": "Nulo",
+            "Grupo": "1"
+        }
+    },
+    "Trainer": {},
+    "Rutas": {
+        "Ruta NodeJS": {},
+        "Ruta Java": {
+            "U1": {
+                "Módulos": {}
+            }
+        },
+        "Ruta NetCore": {}
+    }
+}
