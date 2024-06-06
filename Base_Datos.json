@@ -13,8 +13,25 @@
             },
             "Estado": "Cursando",
             "Ruta": "Diseño de interiores",
-            "Riesgo": "Nulo",
-            "Grupo": "P1"
+            "Riesgo": true,
+            "Grupo": "P1",
+            "Notas": {
+                "Fundamentos de programacion": {
+                    "Introducción a la algoritmia": {
+                        "Nota Teorica": 25,
+                        "Nota Practica": 75,
+                        "Nota Trabajos": 26.0,
+                        "Nota Final": 55.1
+                    },
+                    "PSeInt": {
+                        "Nota Teorica": 36,
+                        "Nota Practica": 75,
+                        "Nota Trabajos": 0,
+                        "Nota Final": 55.8
+                    }
+                }
+            },
+            "Reprobadas": 2
         },
         "1005155987": {
             "Nombre": "ANDRES",
@@ -30,6 +47,20 @@
             "Ruta": "Diseño de interiores",
             "Riesgo": "Nulo",
             "Grupo": "P2"
+        },
+        "258741": {
+            "Nombre": "Jose",
+            "Apellidos": "pass",
+            "Direccion": "sks",
+            "Email": "j@gmail.com",
+            "Acudiente": "jsjsj",
+            "Telefono": {
+                "Fijo": "321",
+                "Movil": "3"
+            },
+            "Estado": "Aprobado",
+            "Ruta": "No asignada",
+            "Riesgo": "Nulo"
         }
     },
     "Trainer": {
@@ -52,6 +83,16 @@
             "Telefono": {
                 "Fijo": "45",
                 "Movil": "35"
+            },
+            "Ruta": "No asignado"
+        },
+        "3654": {
+            "Nombre": "Jose",
+            "Apellidos": "Prada",
+            "Direccion": "giron",
+            "Telefono": {
+                "Fijo": "331",
+                "Movil": "215"
             },
             "Ruta": "No asignado"
         }
