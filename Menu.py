@@ -7,6 +7,7 @@ import Gestion_Camper as camper
 import Reportes 
 import Horarios
 import Trainer_notas as notas
+
 Opc_Roles = ("1. Candidato", "2. Camper", "3. Trainer", "4. Coordinador", "5. Cerrar sesion")
 
 Opc_Candidato =("1. Registarse", "2. Informacion Personal", "3. Ver Estado", "4. Volver al Menu principal")
@@ -15,8 +16,8 @@ Opc_Trainer =("1. Ver Datos", "2. Rutas asignadas", "3. Notas", "4. Menu Anterio
 Opc_Coordinador =("1. Modificar estado", "2. Matricula", "3. Reportes", "4. Menu anterior")
 Opc_matricula=("1. Registrar trainer", "2. Crear ruta de entrenamiento", "3. Crear grupo", "4. Asignar Ruta/Grupo ", "5. Asignar modulos ", "6. Asignar Salon y horario", "7. Menu Anterior")
 opc_asignar = ("1. Camper", "2. Trainer", "3. Menu anterior")
-opc_reportes =("1. Campers inscritos", "2. Campers aprobados", "3. Trainers activos", "4. Campers bajo rendimiento", "5. Campers y trainer por ruta", "6. Reporte del modulo")
-
+opc_reportes =("1. Campers inscritos", "2. Campers aprobados", "3. Trainers activos", "4. Campers bajo rendimiento", "5. Campers y trainer por ruta", "6. Reporte del modulo", "7. Menu Anterior")
+opc_estado = ("1. Cambiar Estado Candidato", "2. Retirar Camper", "3. Expulsar", "4. Menu Anterior")
 def menu_coordinador():
     print("********")
     print("Bienvenidao Coordinador")
@@ -30,9 +31,9 @@ def menu_coordinador():
             print("Dato incorrecto")
         else:
             if opc_c == len(Opc_Coordinador):
-                return
+                return menu_principal()
             elif opc_c == 1:
-                Estado.modificar_Estado_candidato()
+                menu_Estado()
             elif opc_c == 2:
                 menu_matricula()
             elif opc_c == 3:
@@ -102,7 +103,7 @@ def menu_reportes():
             print("Dato incorrecto")
         else:
             if opc_c == len(Opc_matricula):
-                return
+                return menu_coordinador()
             elif opc_c == 1:
                 Reportes.Candidatos_Inscritos()
             elif opc_c == 2:
@@ -110,11 +111,11 @@ def menu_reportes():
             elif opc_c == 3:
                 Reportes.listar_trainers_activos()   
             elif opc_c == 4:
-                menu_asignar()    
+                Reportes.camper_bajo_rendimiento()   
             elif opc_c == 5:
-                Reportes.Camper_Trainer_Misma_Ruta_Grupo()  
+                Reportes.camper_trainer_misma_ruta() 
             elif opc_c == 6:
-                print("")                                   
+                Reportes.reporte_por_modulo()                                  
             else:
                 print("Opcion Invalida")
             print("*********")
@@ -144,6 +145,28 @@ def menu_candidato():
                 print("Opcion Invalida")
             print("*********")
 
+def menu_Estado():
+    print("********")
+    while True:
+        print("Selecciona ----->")
+        for i in opc_estado:
+            print(i)
+        try:
+            opc_c = int(input("Ingresa la opcion: "))
+        except ValueError:
+            print("Dato incorrecto")
+        else:
+            if opc_c == len(Opc_Candidato):
+                return menu_coordinador()
+            elif opc_c == 1:
+                Estado.actualizar_estado_camper()
+            elif opc_c == 2:
+                Estado.retirar_Camper()
+            elif opc_c == 3:
+                Estado.expulsar_camper()                
+            else:
+                print("Opcion Invalida")
+            print("*********")
 
 def menu_camper():
     print("********")
@@ -188,9 +211,9 @@ def menu_trainer():
             elif opc_c == 1:
                 info.ver_informacion("Trainer")
             elif opc_c == 2:
-                Ver_Estado()
+                trainer.Rutas_asignadas()
             elif opc_c==3:
-                notas.calificar_modulo()
+                notas.calificar_camper()
             else:
                 print("Opcion Invalida")
             print("*********")  

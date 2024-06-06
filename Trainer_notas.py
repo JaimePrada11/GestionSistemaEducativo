@@ -5,6 +5,9 @@ from Rutas import mostrar_grupo_ruta
 notas_trabajos = {}
 notas = {}
 
+notas_trabajos = {}
+notas = {}
+
 def Trabajos_Clase():
     global notas_trabajos
     print("Notas de trabajo en clase")
@@ -12,67 +15,72 @@ def Trabajos_Clase():
         Cant_Notas = int(input("Ingresa la cantidad de notas: "))
     except ValueError:
         print("Error de Dato: Por favor ingrese un número válido.")
+        return 0
 
     Nota_parcial = 0
-
-    if Cant_Notas > 1:
-        for i in range(Cant_Notas):
-            nombre = input("Ingresa el nombre del trabajo: ")
-            
-            try:
-                Nota = int(input(f"Ingresa el valor de la nota para {nombre}: "))
-                if not (0 <= Nota <= 100):
-                    print("La nota debe estar entre 0 y 100.")
-
-            except ValueError:
-                print("Error de Dato: Por favor ingrese un número válido.")
-
-
-            try:
-                porcentaje = int(input(f"Ingresa el porcentaje de {nombre}: "))
-                if not (0 <= porcentaje <= 100):
-                    print("El porcentaje debe estar entre 0 y 100.")
-            except ValueError:
-                print("Error de Dato: Por favor ingrese un número válido.")
-
-            notas_trabajos[nombre] = {"Nota": Nota, "Porcentaje": porcentaje}
-            nota_porcentual = Nota * (porcentaje / 100)
-            Nota_parcial += nota_porcentual
-
-        return Nota_parcial
-    else:
+    for i in range(Cant_Notas):
         nombre = input("Ingresa el nombre del trabajo: ")
         try:
-            Nota = int(input(f"Ingresa el valor de la nota de {nombre} : "))
+            Nota = int(input(f"Ingresa el valor de la nota para {nombre}: "))
             if not (0 <= Nota <= 100):
                 print("La nota debe estar entre 0 y 100.")
-                return
+                continue
         except ValueError:
             print("Error de Dato: Por favor ingrese un número válido.")
-            return
+            continue
 
-        notas_trabajos[nombre] = {"Nota": Nota}
-        return Nota
+        try:
+            porcentaje = int(input(f"Ingresa el porcentaje de {nombre}: "))
+            if not (0 <= porcentaje <= 100):
+                print("El porcentaje debe estar entre 0 y 100.")
+                continue
+        except ValueError:
+            print("Error de Dato: Por favor ingrese un número válido.")
+            continue
 
-def Ingresar_Nota(skill):
+        notas_trabajos[nombre] = {"Nota": Nota, "Porcentaje": porcentaje}
+        nota_porcentual = Nota * (porcentaje / 100)
+        Nota_parcial += nota_porcentual
+
+    return Nota_parcial
+
+def Ingresar_Nota(cedula, modulo, skill):
     global notas
-    print("*****")
+    print(f"***** Calificando {skill} en el módulo {modulo} *****")
     try:
         nota_teoria = int(input("Ingresa nota teorica: "))
         nota_practica = int(input("Ingresa nota practica: "))
         if not (0 <= nota_teoria <= 100) or not (0 <= nota_practica <= 100):
             print("Las notas deben estar entre 0 y 100.")
-            return
+            return False
     except ValueError:
         print("Error de Dato: Por favor ingrese un número válido para las notas.")
-        return
+        return False
+
     nota_trabajos = Trabajos_Clase()
 
-    final = nota_teoria*.3 + nota_practica*0.6 + nota_trabajos*0.1
-    notas["Nota Teorica"] = nota_teoria
-    notas["Nota Practica"] = nota_practica
-    notas["Nota Trabajos"] = notas_trabajos
-    notas["Nota Final"] = final
+    final = nota_teoria * 0.3 + nota_practica * 0.6 + nota_trabajos * 0.1
+
+    if "Notas" not in Informacion["Camper"][cedula]:
+        Informacion["Camper"][cedula]["Notas"] = {}
+    if modulo not in Informacion["Camper"][cedula]["Notas"]:
+        Informacion["Camper"][cedula]["Notas"][modulo] = {}
+
+    Informacion["Camper"][cedula]["Notas"][modulo][skill] = {
+        "Nota Teorica": nota_teoria,
+        "Nota Practica": nota_practica,
+        "Nota Trabajos": nota_trabajos,
+        "Nota Final": final
+    }
+
+    # Marcar riesgo y contar tecnologías reprobadas
+    if final < 60:
+        if "Reprobadas" not in Informacion["Camper"][cedula]:
+            Informacion["Camper"][cedula]["Reprobadas"] = 0
+        Informacion["Camper"][cedula]["Reprobadas"] += 1
+        Informacion["Camper"][cedula]["Riesgo"] = True
+
+    return True
 
 def calificar_camper():
     cargar_datos()
@@ -86,15 +94,20 @@ def calificar_camper():
             ruta_camper = Informacion["Camper"][cedula]["Ruta"]
             grupo_camper = Informacion["Camper"][cedula]["Grupo"]
             if ruta_camper in Informacion["Rutas"] and grupo_camper in Informacion["Rutas"][ruta_camper]:
-                modulo_camper = Informacion["Rutas"][ruta_camper][grupo_camper]["Módulos"]
-                for modulo, tecnologias in modulo_camper.items():
-                    print(f"Modulo: {modulo}")
-                    for skill in tecnologias:
-                        print(f"- {skill}") 
-                        if not Ingresar_Nota(skill):
-                            return
+                modulos_skills = Informacion["Rutas"][ruta_camper][grupo_camper]["Módulos"]
+                seguir_progreso_calificacion(cedula, modulos_skills)
+                guardar_datos()
     else:
         print("Cédula de camper no encontrada o no está cursando.")
 
-
-calificar_camper()
+def seguir_progreso_calificacion(cedula, modulos_skills):
+    for nombre_modulo, tecnologias in modulos_skills.items():
+        print(f"Modulo: {nombre_modulo}")
+        for tecnologia in tecnologias:
+            print(f"- {tecnologia}")
+            if not Ingresar_Nota(cedula, nombre_modulo, tecnologia):
+                return
+            if input("¿Desea calificar la siguiente tecnología? (s/n): ").lower() != 's':
+                return
+        if input("¿Desea calificar el siguiente módulo? (s/n): ").lower() != 's':
+            return

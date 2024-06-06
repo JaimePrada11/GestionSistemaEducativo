@@ -14,8 +14,8 @@ def ver_informacion(rol):
         print(f"Nombre: {participante['Nombre']}")
         print(f"Apellidos: {participante['Apellidos']}")
         print(f"Email: {participante['Email']}")
-        print(f"Telefono Movil: {participante["Telefono"]["Movil"] }")
-        print(f"Telefono Fijo: {participante["Telefono"]["Fijo"] }")
+        print(f"Telefono Movil: {participante['Telefono']['Movil'] }")
+        print(f"Telefono Fijo: {participante['Telefono']['Fijo'] }")
         print(f"Rol: {rol}")
         print("********")
 

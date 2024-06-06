@@ -46,3 +46,29 @@ def actualizar_estado_camper():
             guardar_datos()
             print("***********")
 
+def expulsar_camper():
+    print("***********")
+    cedula = input("Ingresa cedula de candidato: ")
+    print("***********")
+
+    if cedula not in Informacion["Camper"]:
+        print("El camper no existe ")
+        if Informacion["Camper"][cedula]["Estado"] != "cursando":
+            Informacion["Camper"][cedula]["Estado"] = "Expulsado"
+            guardar_datos()
+            print("***********")
+
+def retirar_Camper():
+    print("***********")
+    cedula = input("Ingresa cedula de candidato: ")
+    print("***********")
+
+    if cedula not in Informacion["Camper"]:
+        print("El camper no existe ")
+        if Informacion["Camper"][cedula]["Estado"] != "cursando":
+            Informacion["Camper"][cedula]["Estado"] = "Retirado"
+            guardar_datos()
+            print("***********")
+
+
+

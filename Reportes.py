@@ -23,35 +23,40 @@ def listar_trainers_activos():
         print(f"Cédula: {cedula}, Nombre: {trainer['Nombre']} {trainer['Apellidos']}")
 
 
-def Camper_Trainer_Misma_Ruta_Grupo():
-    print("***********")
-    cargar_datos()
 
-    ruta, grupo = mostrar_grupo_ruta()
+def camper_trainer_misma_ruta():
+    ruta_grupo = mostrar_grupo_ruta()
+    if ruta_grupo:
+        ruta, grupo = ruta_grupo
+        print("*** Trainers  ***")
+        for cedula, trainer in Informacion["Trainer"].items():
+            if trainer["Ruta"] == ruta and trainer["Grupo"] == grupo:
+                print(f"Nombre: {trainer['Nombre']} {trainer['Apellidos']} / Cedula: {cedula}, ")
 
-    trainers_misma_ruta_grupo = []
-    camper_misma_ruta_grupo = []
+        print("*** Trainers  ***")
+        for cedula, camper in Informacion["Camper"].items():
+            if camper["Ruta"] == ruta and camper["Grupo"] == grupo:
+                print(f"Nombre: {camper['Nombre']} {camper['Apellidos']} / Cedula: {cedula}, ")
 
-    for cedula_trainer, trainer_info in Informacion["Trainer"].items():
-        ruta_trainer = trainer_info["Ruta"]
-        grupo_trainer = trainer_info["Grupo"]
+def camper_bajo_rendimiento():
+    for cedula, camper in Informacion["Camper"].items():
+        if "Notas" in camper and any(modulo.get("Nota Final", 0) < 60 for modulo in camper["Notas"].values()):
+            print(f"Cédula: {cedula}, Nombre: {camper['Nombre']} {camper['Apellidos']}")
 
-        if ruta_trainer == ruta and grupo_trainer == grupo:
-            trainers_misma_ruta_grupo.append(cedula_trainer)
 
-    for cedula_camper, camper_info in Informacion["Camper"].items():
-        if (camper_info["Ruta"] == ruta) and (camper_info["Grupo"] == grupo):
-            camper_misma_ruta_grupo.append(cedula_camper)
+def reporte_por_modulo():
+    modulos = set()
+    for camper in Informacion["Camper"].values():
+        if "Notas" in camper:
+            modulos.update(camper["Notas"].keys())
 
-    if trainers_misma_ruta_grupo:
-        print("Trainers y Camper en la misma ruta y grupo:")
-        for trainer, camper in zip(trainers_misma_ruta_grupo, camper_misma_ruta_grupo):
-            print(f"Trainer: {trainer}, Camper: {camper}")
-    else:
-        print("No se encontraron Trainer y Camper en la misma ruta y grupo.")
-
-    print("***********")
-
-Candidatos_Inscritos()
-Campers_Aprobados()
-listar_trainers_activos()
+    for modulo in modulos:
+        print(f"Reporte para el módulo '{modulo}':")
+        for cedula, camper in Informacion["Camper"].items():
+            if "Notas" in camper and modulo in camper["Notas"]:
+                notas_modulo = camper["Notas"][modulo]
+                for tecnologia, notas_tecnologia in notas_modulo.items():
+                    if tecnologia != "Nota Final":
+                        nota_final = notas_tecnologia.get("Nota Final", "Nota Final no encontrada")
+                        print(f"Cédula: {cedula}, Nombre: {camper['Nombre']} {camper['Apellidos']}, Tecnología: {tecnologia}, Nota Final: {nota_final}")
+        print("\n")

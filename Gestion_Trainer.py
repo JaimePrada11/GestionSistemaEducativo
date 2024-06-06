@@ -32,6 +32,7 @@ def Registro_trainer():
                         else:
                             print("El teléfono móvil debe contener solo números.")
                 trainer["Ruta"] = "No asignado"
+                trainer["Grupo"] = "No asignado"
                 Datos.Informacion["Trainer"][cedula] = trainer
                 Datos.guardar_datos()
 
@@ -66,4 +67,14 @@ def Agregar_Ruta_trainer():
         print("El Trainer no existe.")
     print("***********")
 
-Agregar_Ruta_trainer()
+def Rutas_asignadas():
+    Datos.cargar_datos()
+    cedula = input("Ingresa tu número de cedula: ")
+
+    if cedula in Datos.Informacion["Trainer"]:
+        trainer = Datos.Informacion["Trainer"][cedula]
+        print(f"Entrenador: {trainer['Nombre']} {trainer['Apellidos']}")
+        print("Rutas y grupos asignados:")
+        print(f"Ruta: {trainer['Ruta']} 'Grupo:' {trainer['Grupo']}")
+    else:
+        print("No se encontró ningún entrenador con esa cedula.")

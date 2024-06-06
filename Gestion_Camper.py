@@ -30,4 +30,16 @@ def Agregar_Ruta_camper():
         print("El Camper no existe.")
     print("***********")
 
-Agregar_Ruta_camper()
+def Rutas_asignadas():
+    cargar_datos()
+    cedula = input("Ingresa tu número de cedula: ")
+
+    if cedula in Informacion["Camper"]:
+        camper = Informacion["Camper"][cedula]
+        print(f"Camper: {camper['Nombre']} {camper['Apellidos']}")
+        print("Rutas y grupos asignados:")
+        print(f"Ruta: {camper['Ruta']} 'Grupo:' {camper['Grupo']}")
+    else:
+        print("No se encontró ningún entrenador con esa cedula.")
+
+

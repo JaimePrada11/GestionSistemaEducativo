@@ -111,4 +111,3 @@ def asignar_fecha():
         print("No se seleccionó una ruta válida.")
 
 
-asignar_fecha()
