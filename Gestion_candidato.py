@@ -1,50 +1,66 @@
-from Cargar_Guardar_datos import *
+from Manejo_datos import cargar_datos, guardar_datos
+from Datos import Informacion
+from Validaciones import validar_cedula, validar_email
+
 import Consulta_Informacion_personal as validar
 
 def Registro_candidato():
     cargar_datos()
-    usuario = {}
+    Aspirante = {}
 
+    print("***********")
     print("Informacion basica del candidato")
     print("***********")
 
-    cedula = input("Ingresa la cedula: ")
-    if cedula.isdigit():
-        if not validar.validar_cedula(cedula, "Candidato"):
-            if Informacion["Candidato"].get(cedula, None) is None:
-                usuario["Nombre"] = input("Ingresa el nombre: ")
-                usuario["Apellidos"] = input("Ingresa el apellido: ")
-                usuario["Direccion"] = input("Ingresa la direccion: ")
-                usuario["Acudiente"] = input("Ingresa el nombre de acudiente: ")
-                while True:
-                    telefono_fijo = input("Ingresa telefono fijo: ")
-                    if telefono_fijo.isdigit():
-                        usuario["Telefono"] = {"Fijo": telefono_fijo}
-                        break
-                    else:
-                        print("El teléfono fijo debe contener solo números.")
-                
-                while True:
-                    telefono_movil = input("Ingresa el celular: ")
-                    if telefono_movil.isdigit():
-                        usuario["Telefono"]["Movil"] = telefono_movil
-                        break
-                    else:
-                        print("El teléfono móvil debe contener solo números.")
-                
-                usuario["Estado"] = "Inscrito"
-
-                Informacion["Candidato"][cedula] = usuario
-                guardar_datos()
-
-                print("Informacion Guardada")
-                print("***********")
+    while True:
+        cedula = input("Ingresa la cedula: ")
+        if cedula.lower() == 'cancelar':
+            print("Registro cancelado.")
+            return        
+        if cedula.isdigit():  
+            if not validar_cedula(cedula):  
+                break
             else:
                 print("La cédula ya existe.")
         else:
-            print("La cédula ingresada ya está en uso.")
-    else:
-        print("La cédula debe contener solo números.")
+            print("Cédula no válida. Debe contener solo números.")
+
+    Aspirante["Nombre"] = input("Ingresa el nombre: ")
+    Aspirante["Apellidos"] = input("Ingresa el apellido: ")
+    Aspirante["Direccion"] = input("Ingresa la dirección: ")
+    
+    while True:
+        email = input("Ingresa el email: ")
+        if validar_email(email):
+            Aspirante["Email"] = email
+            break
+        else:
+            print("Email no válido. Por favor, ingresa un email correcto.")
+    
+    Aspirante["Acudiente"] = input("Ingresa el nombre de acudiente: ")
+
+    while True:
+        telefono_fijo = input("Ingresa telefono fijo: ")
+        if telefono_fijo.isdigit():
+            Aspirante["Telefono"] = {"Fijo": telefono_fijo}
+            break
+        else:
+            print("El teléfono fijo debe contener solo números.")
+    
+    while True:
+        telefono_movil = input("Ingresa el celular: ")
+        if telefono_movil.isdigit():
+            Aspirante["Telefono"]["Movil"] = telefono_movil
+            break
+        else:
+            print("El teléfono móvil debe contener solo números.")
+    
+    Aspirante["Estado"] = "Inscrito"
+    Informacion["Candidato"][cedula] = Aspirante
+    guardar_datos()
+
+    print("Informacion Guardada")
+    print("***********")
 
 
 def Ver_Estado():
@@ -56,4 +72,5 @@ def Ver_Estado():
             print(Informacion["Candidato"][cedula]["Estado"])
         else:
             print(Informacion["Camper"][cedula]["Estado"])
-
+    else: 
+        print("El aspirante no existe")
