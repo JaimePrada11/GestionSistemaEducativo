@@ -1,90 +1,100 @@
-import Cargar_Guardar_datos as Datos
+from Manejo_datos import guardar_datos, cargar_datos
+from Datos import Informacion, modulos_skills
+from Rutas import mostrar_grupo_ruta
 
-notas =[]
+notas_trabajos = {}
+notas = {}
 
 def Trabajos_Clase():
-    global notas 
+    global notas_trabajos
+    print("Notas de trabajo en clase")
     try:
-        Cant_Notas = int(input("Ingresa cantidad de notas"))
-    except Exception:
-        print("ok")
+        Cant_Notas = int(input("Ingresa la cantidad de notas: "))
+    except ValueError:
+        print("Error de Dato: Por favor ingrese un número válido.")
 
-    Nota_final=0
     Nota_parcial = 0
 
     if Cant_Notas > 1:
         for i in range(Cant_Notas):
-            Nota=int(input("Ingresa el valor de la nota"))
-            porcentaje = int(input("Ingresa el porcentaje de la nota"))
+            nombre = input("Ingresa el nombre del trabajo: ")
             
-            notas.append(Nota)
-            nota_porcentual = Nota * (porcentaje/100)
+            try:
+                Nota = int(input(f"Ingresa el valor de la nota para {nombre}: "))
+                if not (0 <= Nota <= 100):
+                    print("La nota debe estar entre 0 y 100.")
+
+            except ValueError:
+                print("Error de Dato: Por favor ingrese un número válido.")
+
+
+            try:
+                porcentaje = int(input(f"Ingresa el porcentaje de {nombre}: "))
+                if not (0 <= porcentaje <= 100):
+                    print("El porcentaje debe estar entre 0 y 100.")
+            except ValueError:
+                print("Error de Dato: Por favor ingrese un número válido.")
+
+            notas_trabajos[nombre] = {"Nota": Nota, "Porcentaje": porcentaje}
+            nota_porcentual = Nota * (porcentaje / 100)
             Nota_parcial += nota_porcentual
-        Nota_final = Nota_parcial * 0.1
+
+        return Nota_parcial
     else:
-        Nota=int(input("Ingresa el valor de la nota"))
-        Nota_final = Nota * 0.1
-    return Nota_final
+        nombre = input("Ingresa el nombre del trabajo: ")
+        try:
+            Nota = int(input(f"Ingresa el valor de la nota de {nombre} : "))
+            if not (0 <= Nota <= 100):
+                print("La nota debe estar entre 0 y 100.")
+                return
+        except ValueError:
+            print("Error de Dato: Por favor ingrese un número válido.")
+            return
 
+        notas_trabajos[nombre] = {"Nota": Nota}
+        return Nota
 
-def Ingresar_Nota():
+def Ingresar_Nota(skill):
     global notas
     print("*****")
-    nota_teoria = int(input("Ingresa nota teorica"))
-    nota_practica = int(input("Ingresa nota practica"))
+    try:
+        nota_teoria = int(input("Ingresa nota teorica: "))
+        nota_practica = int(input("Ingresa nota practica: "))
+        if not (0 <= nota_teoria <= 100) or not (0 <= nota_practica <= 100):
+            print("Las notas deben estar entre 0 y 100.")
+            return
+    except ValueError:
+        print("Error de Dato: Por favor ingrese un número válido para las notas.")
+        return
     nota_trabajos = Trabajos_Clase()
 
-    final = nota_teoria*.3 + nota_practica*0.6 + nota_trabajos
+    final = nota_teoria*.3 + nota_practica*0.6 + nota_trabajos*0.1
+    notas["Nota Teorica"] = nota_teoria
+    notas["Nota Practica"] = nota_practica
+    notas["Nota Trabajos"] = notas_trabajos
+    notas["Nota Final"] = final
 
-    print(final)
+def calificar_camper():
+    cargar_datos()
+    print("***********")
+    print("Módulo de calificaciones")
+    print("***********")
 
-def calificar_modulo():
-    Datos.cargar_datos()
+    cedula = input("Ingresa la cédula del camper: ")
+    if cedula in Informacion["Camper"]:
+        if Informacion["Camper"][cedula]["Estado"] == "Cursando":
+            ruta_camper = Informacion["Camper"][cedula]["Ruta"]
+            grupo_camper = Informacion["Camper"][cedula]["Grupo"]
+            if ruta_camper in Informacion["Rutas"] and grupo_camper in Informacion["Rutas"][ruta_camper]:
+                modulo_camper = Informacion["Rutas"][ruta_camper][grupo_camper]["Módulos"]
+                for modulo, tecnologias in modulo_camper.items():
+                    print(f"Modulo: {modulo}")
+                    for skill in tecnologias:
+                        print(f"- {skill}") 
+                        if not Ingresar_Nota(skill):
+                            return
+    else:
+        print("Cédula de camper no encontrada o no está cursando.")
 
-    print("Las rutas de entrenamiento disponibles son:")
-    for i, ruta in enumerate(Datos.Informacion["Rutas"], 1):
-        print(f"{i}. {ruta}")
 
-    try:
-        opc_ruta = int(input("Selecciona la ruta para calificar los módulos: "))
-        if 1 <= opc_ruta <= len(Datos.Informacion["Rutas"]):
-            ruta_seleccionada = list(Datos.Informacion["Rutas"])[opc_ruta - 1]
-        else:
-            print("Opción inválida.")
-            return
-    except ValueError:
-        print("Entrada inválida.")
-        return
-
-    print(f"Los grupos en la ruta '{ruta_seleccionada}' son:")
-    for i, grupo in enumerate(Datos.Informacion["Rutas"][ruta_seleccionada], 1):
-        print(f"{i}. {grupo}")
-
-    try:
-        opc_grupo = int(input("Selecciona el grupo para calificar los módulos: "))
-        if 1 <= opc_grupo <= len(Datos.Informacion["Rutas"][ruta_seleccionada]):
-            grupo_seleccionado = list(Datos.Informacion["Rutas"][ruta_seleccionada])[opc_grupo - 1]
-        else:
-            print("Opción inválida.")
-            return
-    except ValueError:
-        print("Entrada inválida.")
-        return
-
-    if "Módulos" not in Datos.Informacion["Rutas"][ruta_seleccionada][grupo_seleccionado]:
-        print("El grupo seleccionado no tiene módulos para calificar.")
-        return
-
-    while True:  
-        modulos_grupo = Datos.Informacion["Rutas"][ruta_seleccionada][grupo_seleccionado]["Módulos"]
-        for modulo, tecnologias in modulos_grupo.items():
-            print(f"Calificando módulo '{modulo}':")
-            for tecnologia in tecnologias:
-                print(f"Calificación para '{tecnologia}':")
-                calificacion = Ingresar_Nota()
-
-        respuesta = input("¿Desea seguir calificando otra nota? (s/n): ")
-        if respuesta.lower() != 's':
-            break
-
-    print("Calificación completada.")
+calificar_camper()

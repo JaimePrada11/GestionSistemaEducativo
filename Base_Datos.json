@@ -2,18 +2,34 @@
     "Candidato": {},
     "Camper": {
         "123456": {
-            "Nombre": "Andres",
-            "Apellidos": "Prada",
-            "Direccion": "cra 15",
-            "Acudiente": "sonia",
+            "Nombre": "a",
+            "Apellidos": "sa",
+            "Direccion": "as",
+            "Email": "j@gmail.com",
+            "Acudiente": "sd",
             "Telefono": {
-                "Fijo": "6011778698",
-                "Movil": "3014"
+                "Fijo": "25",
+                "Movil": "3011778698"
             },
-            "Estado": "Aprobado",
-            "Ruta": "Ruta Java",
+            "Estado": "Cursando",
+            "Ruta": "Diseño de interiores",
             "Riesgo": "Nulo",
-            "Grupo": "1"
+            "Grupo": "P1"
+        },
+        "1005155987": {
+            "Nombre": "ANDRES",
+            "Apellidos": "PRADA",
+            "Direccion": "CRTA",
+            "Email": "JANDRES@GMAIL.COM",
+            "Acudiente": "SONIA",
+            "Telefono": {
+                "Fijo": "301",
+                "Movil": "321456"
+            },
+            "Estado": "Cursando",
+            "Ruta": "Diseño de interiores",
+            "Riesgo": "Nulo",
+            "Grupo": "P2"
         }
     },
     "Trainer": {
@@ -24,6 +40,18 @@
             "Telefono": {
                 "Fijo": "15",
                 "Movil": "15"
+            },
+            "Ruta": "Diseño de interiores",
+            "Grupo": "P2",
+            "Notas": {}
+        },
+        "6547": {
+            "Nombre": "Jaime",
+            "Apellidos": "Prada",
+            "Direccion": "cra",
+            "Telefono": {
+                "Fijo": "45",
+                "Movil": "35"
             },
             "Ruta": "No asignado"
         }
@@ -44,10 +72,51 @@
                         "Bootstrap"
                     ]
                 },
-                "Salon": "Artemis",
+                "Salon": "Apollo",
                 "Hora": "6pm-10pm"
             }
         },
-        "Ruta NetCore": {}
+        "Ruta NetCore": {},
+        "Diseño de interiores": {
+            "P1": {
+                "Módulos": {
+                    "Fundamentos de programacion": [
+                        "Introducción a la algoritmia",
+                        "PSeInt",
+                        "Python"
+                    ],
+                    "Fundamentos web": [
+                        "HTML",
+                        "CSS",
+                        "Bootstrap"
+                    ],
+                    "Programación formal": [
+                        "Java",
+                        "JavaScript",
+                        "C#"
+                    ],
+                    "Bases de datos": [
+                        "Mysql",
+                        "Postgresql"
+                    ],
+                    "Backend": [
+                        "NetCore",
+                        "Spring Boot",
+                        "NodeJS",
+                        "Express"
+                    ]
+                },
+                "Salon": "Sputnik",
+                "Hora": "6am-10am",
+                "Fecha de Inicio": "2022-11-25",
+                "Fecha de Fin": "2023-05-26",
+                "Duracion": 6
+            },
+            "P2": {
+                "Módulos": {},
+                "Salon": "Sputnik",
+                "Hora": "10am-2pm"
+            }
+        }
     }
 }

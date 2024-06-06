@@ -1,11 +1,14 @@
-import Cargar_Guardar_datos as datos
+from Manejo_datos import cargar_datos, guardar_datos
+from Datos import Informacion
 
 def modificar_Estado_candidato():
-    print("***********")
-    datos.cargar_datos()
+    cargar_datos()
 
+    print("***********")
     cedula = input("Ingresa cedula de candidato: ")
-    if cedula not in datos.Informacion["Candidato"]:
+    print("***********")
+
+    if cedula not in Informacion["Candidato"]:
         print("El candidato no existe ")
     else:
         try:
@@ -20,25 +23,26 @@ def modificar_Estado_candidato():
         else:
             promedio = (nota_teorica + nota_practica) / 2
             if promedio >= 60:
-                datos.Informacion["Candidato"][cedula]["Estado"] = "Aprobado"
-                datos.Informacion["Candidato"][cedula]["Ruta"] = "No asignada"
-                datos.Informacion["Candidato"][cedula]["Riesgo"] = "Nulo"
+                Informacion["Candidato"][cedula]["Estado"] = "Aprobado"
+                Informacion["Candidato"][cedula]["Ruta"] = "No asignada"
+                Informacion["Candidato"][cedula]["Riesgo"] = "Nulo"
                     
-                datos.Informacion["Camper"][cedula] = datos.Informacion["Candidato"].pop(cedula)
+                Informacion["Camper"][cedula] = Informacion["Candidato"].pop(cedula)
             else:
-                datos.Informacion["Candidato"][cedula]["Estado"] = "No Aprobado"
+                Informacion["Candidato"][cedula]["Estado"] = "No Aprobado"
             
-            datos.guardar_datos()
+            guardar_datos()
             print("***********")
 
 def actualizar_estado_camper():
     print("***********")
-    datos.cargar_datos()
+    cargar_datos()
     cedula = input("Ingresa cedula de candidato: ")
-    if cedula not in datos.Informacion["Camper"]:
+    if cedula not in Informacion["Camper"]:
         print("El candidato no existe ")
     else:
-        if datos.Informacion["Camper"][cedula]["Ruta"] != "No asignada":
-            datos.Informacion["Camper"][cedula]["Estado"] = "cursando"
-            datos.guardar_datos()
+        if Informacion["Camper"][cedula]["Ruta"] != "No asignada":
+            Informacion["Camper"][cedula]["Estado"] = "cursando"
+            guardar_datos()
             print("***********")
+

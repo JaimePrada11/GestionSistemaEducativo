@@ -1,17 +1,17 @@
-import Cargar_Guardar_datos as Datos
-import Consulta_Informacion_personal as validar
-from Rutas import rutas, mostrar_grupo_ruta
+import Manejo_datos as Datos
+import Validaciones as validar
+from Rutas import mostrar_grupo_ruta
 
 def Registro_trainer():
 
     Datos.cargar_datos()
     trainer = {}
-
+    print("***********")
     print("Informacion basica del Trainer")
     print("***********")
     cedula = input("Ingresa la cedula: ")
     if cedula.isdigit():
-        if not validar.validar_cedula(cedula, "Candidato"):
+        if not validar.validar_cedula(cedula):
             if Datos.Informacion["Trainer"].get(cedula, None) is None:
                 trainer["Nombre"] = input("Ingresa el nombre: ")
                 trainer["Apellidos"] = input("Ingresa el apellido: ")
@@ -55,9 +55,8 @@ def Agregar_Ruta_trainer():
             Ruta, grupo_seleccionado = mostrar_grupo_ruta()
             if grupo_seleccionado:
                 Datos.Informacion["Trainer"][cedula]["Ruta"] = Ruta
-                Datos.Informacion["Trainer"][cedula]["Grupo"] = grupo_seleccionado[1]
-                Datos.Informacion["Trainer"][cedula]["Notas"] = {}
-                print(f"El Trainer de cédula {cedula} se asignó al grupo {grupo_seleccionado[1]} en la ruta {Ruta}.")
+                Datos.Informacion["Trainer"][cedula]["Grupo"] = grupo_seleccionado
+                print(f"El Trainer de cédula {cedula} se asignó al grupo {grupo_seleccionado} en la ruta {Ruta}.")
             else:
                 print("No se asignó ningún grupo al Camper.")
         else:
@@ -67,3 +66,4 @@ def Agregar_Ruta_trainer():
         print("El Trainer no existe.")
     print("***********")
 
+Agregar_Ruta_trainer()

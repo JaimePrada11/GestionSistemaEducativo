@@ -1,35 +1,40 @@
-import Cargar_Guardar_datos as datos
-from Rutas import rutas, mostrar_grupo_ruta
+from Manejo_datos import cargar_datos, guardar_datos
+from Datos import *
+
+from Rutas import mostrar_grupo_ruta
 from datetime import datetime, timedelta
 
-
-Salon = ("Sputnik", "Apollo", "Artemis")
-
-Horas = ["6am-10am", "10am-2pm", "2pm-6pm", "6pm-10pm"]
 
 salon_horas_disponibles = {salon: Horas.copy() for salon in Salon}
 
 
 def solicitar_fechas():
     while True:
-        inicio = input("Ingresa la fecha de inicio (YYYY-MM-DD): ")
-        fin = input("Ingresa la fecha de fin (YYYY-MM-DD): ")
-
+        fecha = input("Ingresa la fecha en formato YYYY-MM-DD: ")
         try:
-            inicio = datetime.datetime.strptime(inicio, "%Y-%m-%d")
-            fin = datetime.datetime.strptime(fin, "%Y-%m-%d")
+            fecha_inicio = datetime.strptime(fecha, "%Y-%m-%d")
+            break
         except ValueError:
-            print("Formato de fecha incorrecto. Inténtalo de nuevo.")
-            continue
+            print("Formato de fecha inválido. Debe ser YYYY-MM-DD.")
+
+    while True:
+        try:
+            duracion = int(input("Ingresa la duración en meses: "))
+            if duracion <= 0:
+                print("La duración debe ser mayor que cero.")
+                continue
+            break
+        except ValueError:
+            print("Ingrese un número entero válido para la duración.")
         
-        if inicio >= fin:
-            print("La fecha de inicio debe ser anterior a la fecha de fin. Inténtalo de nuevo.")
-            continue
+    fecha_final = fecha_inicio + timedelta(days=duracion * 30.44)
+    print()
+    return fecha_inicio.strftime("%Y-%m-%d"), fecha_final.strftime("%Y-%m-%d"), duracion
         
-        return inicio, fin
+
 
 def Horario_Salon():
-    datos.cargar_datos()
+    cargar_datos()
 
     while True:
         print("***********")
@@ -71,7 +76,7 @@ def Horario_Salon():
         return salon_seleccionado, hora_seleccionada
 
 def asignar_hora_salon():
-    datos.cargar_datos()
+    cargar_datos()
 
     ruta, grupo = mostrar_grupo_ruta()
     if ruta:
@@ -79,13 +84,31 @@ def asignar_hora_salon():
         print("Selecciona el salón y hora para el grupo:")
         salon_seleccionado, hora_seleccionada = Horario_Salon()
         if grupo:
-            if grupo not in datos.Informacion["Rutas"][ruta]:
-                datos.Informacion["Rutas"][ruta][grupo] = {}
-            datos.Informacion["Rutas"][ruta][grupo]["Salon"] = salon_seleccionado
-            datos.Informacion["Rutas"][ruta][grupo]["Hora"] = hora_seleccionada
-            datos.guardar_datos()
-        else:
-            print("El nombre del grupo no puede estar vacío.")
+            if grupo not in Informacion["Rutas"][ruta]:
+                Informacion["Rutas"][ruta][grupo] = {}
+            Informacion["Rutas"][ruta][grupo]["Salon"] = salon_seleccionado
+            Informacion["Rutas"][ruta][grupo]["Hora"] = hora_seleccionada
+            guardar_datos()
     else:
         print("No se seleccionó ninguna ruta.")
 
+def asignar_fecha():
+    cargar_datos()
+
+    ruta, grupo = mostrar_grupo_ruta()
+    if ruta:
+        fecha_inicio, fecha_final, duracion = solicitar_fechas()
+        if grupo:
+            if grupo not in Informacion["Rutas"][ruta]:
+                Informacion["Rutas"][ruta][grupo] = {}
+            Informacion["Rutas"][ruta][grupo]["Fecha de Inicio"] = fecha_inicio
+            Informacion["Rutas"][ruta][grupo]["Fecha de Fin"] = fecha_final
+            Informacion["Rutas"][ruta][grupo]["Duracion"] = duracion
+            guardar_datos()
+        else:
+            print("No se seleccionó un grupo válido.")
+    else:
+        print("No se seleccionó una ruta válida.")
+
+
+asignar_fecha()

@@ -1,5 +1,3 @@
-import json
-
 Informacion = {"Candidato": {}, 
                "Camper": {}, 
                "Trainer": {},
@@ -10,9 +8,6 @@ Informacion = {"Candidato": {},
                    }
                }
 
-
-
-
 modulos_skills = [
     {"Fundamentos de programacion":["Introducción a la algoritmia", "PSeInt",  "Python"]},
     {"Fundamentos web":["HTML", "CSS", "Bootstrap"]},
@@ -21,21 +16,6 @@ modulos_skills = [
     {"Backend":["NetCore", "Spring Boot", "NodeJS", "Express"]}
 ] 
 
+Salon = ("Sputnik", "Apollo", "Artemis")
 
-Ruta_JSON = "Base_Datos.json"
-
-
-def guardar_datos():
-    try:
-        contenido = json.dumps(Informacion, indent=4,  ensure_ascii=False)
-        with open(Ruta_JSON, "w", encoding='utf-8') as file:
-            file.write(contenido)
-    except Exception:
-        print("Error al guardar los datos:")
-
-def cargar_datos():
-    try:
-        with open(Ruta_JSON, mode="r", encoding='utf-8') as archivo:
-            Informacion.update(json.load(archivo))
-    except Exception:
-        print("Error al cargar Datos")
+Horas = ["6am-10am", "10am-2pm", "2pm-6pm", "6pm-10pm"]
