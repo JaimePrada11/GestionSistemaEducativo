@@ -1,5 +1,30 @@
 {
-    "Candidato": {},
+    "Candidato": {
+        "5555555": {
+            "Nombre": "ANDRES",
+            "Apellidos": "PRADA",
+            "Direccion": "JJ",
+            "Email": "J@GMAIL.COM",
+            "Acudiente": "AAS",
+            "Telefono": {
+                "Fijo": "3011778698",
+                "Movil": "60117769"
+            },
+            "Estado": "Inscrito"
+        },
+        "321456": {
+            "Nombre": "SARA",
+            "Apellidos": "PEREZ",
+            "Direccion": "GIRON",
+            "Email": "K@HOTMAIL.COM",
+            "Acudiente": "SONIA",
+            "Telefono": {
+                "Fijo": "3011778698",
+                "Movil": "321456987"
+            },
+            "Estado": "Inscrito"
+        }
+    },
     "Camper": {
         "123456": {
             "Nombre": "a",
@@ -95,6 +120,17 @@
                 "Movil": "215"
             },
             "Ruta": "No asignado"
+        },
+        "254698": {
+            "Nombre": "KEVIN",
+            "Apellidos": "LOPEZ",
+            "Direccion": "KEVIN@GMAIL.COM",
+            "Telefono": {
+                "Fijo": "3011778698",
+                "Movil": "321456"
+            },
+            "Ruta": "No asignado",
+            "Grupo": "No asignado"
         }
     },
     "Rutas": {

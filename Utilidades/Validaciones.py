@@ -9,4 +9,4 @@ def validar_cedula(cedula):
     for Categoria in Datos.Informacion.values():
         if cedula in Categoria:
             return True
-        return False
+    return False

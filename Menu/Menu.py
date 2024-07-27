@@ -1,6 +1,6 @@
 from Camper.Gestion_candidato import *
 import Utilidades.Consulta_Informacion_personal as info
-import Coordinacion.Estado as Estadonacion.Estado as Estado 
+import Coordinacion.Estado as Estado 
 import Coordinacion.Gestion_Trainer as trainer
 import Coordinacion.Rutas as Rutas
 import Camper.Gestion_Camper as camper
