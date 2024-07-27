@@ -1,8 +1,8 @@
-from Manejo_datos import cargar_datos, guardar_datos
-from Datos import Informacion
-from Validaciones import validar_cedula, validar_email
+from Utilidades.Manejo_datos import cargar_datos, guardar_datos
+from Utilidades.Datos import Informacion
+from Utilidades.Validaciones import validar_cedula, validar_email
 
-import Consulta_Informacion_personal as validar
+import Utilidades.Consulta_Informacion_personal as validar
 
 def Registro_candidato():
     cargar_datos()

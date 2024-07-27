@@ -1,7 +1,7 @@
-from Manejo_datos import cargar_datos, guardar_datos
-from Datos import Informacion
+from Utilidades.Manejo_datos import cargar_datos, guardar_datos
+from Utilidades.Datos import Informacion
 
-from Rutas import  mostrar_grupo_ruta
+from Coordinacion.Rutas import  mostrar_grupo_ruta
 
 def Agregar_Ruta_camper():
     print("***********")

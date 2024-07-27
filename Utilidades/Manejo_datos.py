@@ -1,9 +1,9 @@
 import json
 
-from Datos import *
+from Utilidades.Datos import *
 
 
-Ruta_JSON = "Base_Datos.json"
+Ruta_JSON = "Data_Base/Base_Datos.json"
 
 
 def guardar_datos():

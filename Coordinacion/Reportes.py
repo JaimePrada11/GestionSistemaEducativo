@@ -1,6 +1,6 @@
-from Manejo_datos import cargar_datos, guardar_datos
-from Rutas import mostrar_grupo_ruta
-from Datos import Informacion
+from Utilidades.Manejo_datos import cargar_datos, guardar_datos
+from Coordinacion.Rutas import mostrar_grupo_ruta
+from Utilidades.Datos import Informacion
 
 def Candidatos_Inscritos():
     cargar_datos()
