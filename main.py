@@ -1,3 +1,3 @@
 from Menu.Menu import *
 
-menu_principal()
+menu_principal()1

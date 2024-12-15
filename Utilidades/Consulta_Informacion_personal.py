@@ -20,6 +20,11 @@ def ver_informacion(rol):
         print(f"| {'Teléfono Móvil':<20} | {participante['Telefono']['Movil']:<28} |")
         print(f"| {'Teléfono Fijo':<20} | {participante['Telefono']['Fijo']:<28} |")
         print(f"| {'Rol':<20} | {rol:<28} |")
+        if rol == "Candidato":
+            print(f"| {'Acudiente':<20} | {participante['Acudiente']:<28} |")
+        elif rol == "Trainer":
+            print(f"| {'Ruta':<20} | {participante['Ruta']:<28} |")
+            print(f"| {'Grupo':<20} | {participante['Grupo']:<28} |")
         print("\n" + "="*40)
     else:
         print("="*40 + "")
