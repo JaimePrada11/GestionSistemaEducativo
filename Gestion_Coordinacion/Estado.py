@@ -1,38 +1,50 @@
 from Gestion_Datos.Manejo_datos import cargar_datos, guardar_datos
 from Gestion_Datos.Datos import Informacion
 
-def modificar_Estado_candidato():
+def modificar_estado_candidato():
+
     cargar_datos()
 
-    print("***********")
-    cedula = input("Ingresa cedula de candidato: ")
-    print("***********")
+    print("\n" + "="*40)
+    cedula = input("🆔 Ingresa la cédula del candidato: ")
+    print("\n" + "="*40)
 
-    if cedula not in Informacion["Candidato"]:
-        print("El candidato no existe ")
-    else:
-        try:
-            nota_teorica = int(input("Ingresa la nota teorica: "))
-            nota_practica = int(input("Ingresa la nota practica: "))
-            if not (0 <= nota_teorica <= 100) or not (0 <= nota_practica <= 100):
-                print("La nota maxima es 100.")
-                
-        except ValueError:
-            print("Error de Dato: Por favor ingrese un número válido")
+    if cedula not in Informacion.get("Candidato", {}):
+        print("❌ El candidato no existe en el sistema.")
+        return
+
+    try:
+        nota_teorica = float(input("📚 Ingresa la nota teórica (0-100): "))
+        nota_practica = float(input("🛠️ Ingresa la nota práctica (0-100): "))
+        
+        if not (0 <= nota_teorica <= 100) or not (0 <= nota_practica <= 100):
+            print("⚠️ Las notas deben estar entre 0 y 100.")
             return
-        else:
-            promedio = (nota_teorica + nota_practica) / 2
-            if promedio >= 60:
-                Informacion["Candidato"][cedula]["Estado"] = "Aprobado"
-                Informacion["Candidato"][cedula]["Ruta"] = "No asignada"
-                Informacion["Candidato"][cedula]["Riesgo"] = "Nulo"
-                    
-                Informacion["Camper"][cedula] = Informacion["Candidato"].pop(cedula)
-            else:
-                Informacion["Candidato"][cedula]["Estado"] = "No Aprobado"
-            
-            guardar_datos()
-            print("***********")
+    except ValueError:
+        print("❌ Error de dato: Por favor, ingresa un número válido para las notas.")
+        return
+
+    promedio = (nota_teorica + nota_practica) / 2
+
+    candidato = Informacion["Candidato"][cedula]
+    if promedio >= 60:
+        candidato["Estado"] = "Aprobado"
+        candidato["Ruta"] = "No asignada"
+        candidato["Riesgo"] = "Nulo"
+        Informacion["Camper"][cedula] = Informacion["Candidato"].pop(cedula)
+
+        print(f"\n🎉 ¡Felicidades! El candidato {candidato['Nombre']} ha sido promovido a Camper.")
+    else:
+        candidato["Estado"] = "No Aprobado"
+        print(f"\n❌ El candidato {candidato['Nombre']} no aprobó. Promedio final: {promedio:.2f}")
+
+    # Guardar los cambios
+    guardar_datos()
+    print("="*40)
+    print("\n✅ Los datos se han actualizado correctamente.")
+    print("="*40)
+
+
 
 def actualizar_estado_camper():
     print("***********")

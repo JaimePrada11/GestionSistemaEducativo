@@ -2,9 +2,9 @@ Informacion = {"Candidato": {},
                "Camper": {}, 
                "Trainer": {},
                "Rutas": {
-                   "Ruta NodeJS": {}, 
-                   "Ruta Java": {},
-                   "Ruta NetCore": {}
+                   "NodeJS": {}, 
+                   "Java": {},
+                   "NetCore": {}
                    }
                }
 

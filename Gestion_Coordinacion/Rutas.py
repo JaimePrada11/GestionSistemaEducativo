@@ -1,14 +1,23 @@
-from Gestion_Datos.Manejo_datos import cargar_datos, guardar_datos
+from Gestion_Datos.Manejo_datos import *
 from Gestion_Datos.Datos import *
 
 def Mostrar_rutas_entrenamiento():
+
     cargar_datos()
-    print("***********")
-    print("Las actuales rutas de entrenamiento son: ")
-    print("***********")
+
+    print("\n" + "="*40)
+    print("Las actuales rutas de entrenamiento son:")
+    print("="*40)
+
+    print(f"| {'#':<4} | {'Ruta':<30} |")
+    print("="*40)
+
     for i, ruta in enumerate(Informacion["Rutas"].keys(), 1):
-        print(f"{i}. {ruta}")
-    print("***********")
+        print(f"| {i:<4} | {ruta:<30} |")
+
+    print("="*40)
+
+
 
 def Nueva_Ruta_entrenamiento():
     cargar_datos()

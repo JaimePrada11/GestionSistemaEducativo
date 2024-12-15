@@ -58,7 +58,7 @@ def menu_matricula():
             elif opc_c == 1:
                 trainer.registro("Trainer")
             elif opc_c == 2:
-                Rutas.Nueva_Ruta()
+                Rutas.Nueva_Ruta_entrenamiento()
             elif opc_c == 3:
                 Rutas.Crear_grupo_Ruta()   
             elif opc_c == 4:
@@ -66,7 +66,7 @@ def menu_matricula():
             elif opc_c == 5:
                 Rutas.Agregar_modulos_ruta() 
             elif opc_c == 6:
-                Horarios.asignar_hora_salon()                                    
+                Horarios.asignar_fecha()                                    
             else:
                 print("Opcion Invalida")
             print("*********")
@@ -159,7 +159,7 @@ def menu_Estado():
             if opc_c == len(Opc_Candidato):
                 return menu_coordinador()
             elif opc_c == 1:
-                Estado.actualizar_estado_camper()
+                Estado.modificar_estado_candidato()
             elif opc_c == 2:
                 Estado.retirar_Camper()
             elif opc_c == 3:
