@@ -1,49 +1,82 @@
 import Gestion_Datos.Manejo_datos as Datos
 import Utilidades.Validaciones as validar
+import Utilidades.Validaciones
 from Gestion_Coordinacion.Rutas import mostrar_grupo_ruta
 
-def Registro_trainer():
+def registro(rol):
 
     Datos.cargar_datos()
-    trainer = {}
-    print("***********")
-    print("Informacion basica del Trainer")
-    print("***********")
-    cedula = input("Ingresa la cedula: ")
-    if cedula.isdigit():
-        if not validar.validar_cedula(cedula):
-            if Datos.Informacion["Trainer"].get(cedula, None) is None:
-                trainer["Nombre"] = input("Ingresa el nombre: ")
-                trainer["Apellidos"] = input("Ingresa el apellido: ")
-                trainer["Direccion"] = input("Ingresa la direccion: ")
-                while True:
-                    telefono_fijo = input("Ingresa telefono fijo: ")
-                    if telefono_fijo.isdigit():
-                        trainer["Telefono"] = {"Fijo": telefono_fijo}
-                        break
-                    else:
-                        print("El teléfono fijo debe contener solo números.")
-                        
-                while True:
-                        telefono_movil = input("Ingresa el celular: ")
-                        if telefono_movil.isdigit():
-                            trainer["Telefono"]["Movil"] = telefono_movil
-                            break
-                        else:
-                            print("El teléfono móvil debe contener solo números.")
-                trainer["Ruta"] = "No asignado"
-                trainer["Grupo"] = "No asignado"
-                Datos.Informacion["Trainer"][cedula] = trainer
-                Datos.guardar_datos()
+    persona = {}
 
-                print("Informacion Guardada")
-                print("***********")
-            else:
-                print("La cedula ya existe")
+    print("="*40)
+    print(f"📝 Registro de {rol} 📝")
+    print("="*40)
+
+    while True:
+        cedula = input("\n🆔 Ingresa la cédula: ")
+        if not cedula.isdigit():
+            print("❌ La cédula debe contener solo números.\n")
+            continue
+
+        if validar.validar_cedula(cedula):
+            print(f"❌ La cédula ingresada ya está en uso para un {rol.lower()}.\n")
+            return
+        
+        if Datos.Informacion[rol].get(cedula) is not None:
+            print(f"⚠️ La cédula ya existe en el sistema como {rol.lower()}. Por favor, verifica los datos.\n")
+            return
+        break
+
+    # Solicitar información básica
+    persona["Nombre"] = input("\n👤 Ingresa el nombre: ")
+    persona["Apellidos"] = input("👤 Ingresa los apellidos: ")
+    persona["Direccion"] = input("🏠 Ingresa la dirección: ")
+
+    # Validar email
+    while True:
+        email = input("📧 Ingresa el email: ")
+        if validar.validar_email(email):
+            persona["Email"] = email
+            break
         else:
-            print("La cédula ingresada ya está en uso.")
-    else:
-        print("La cédula debe contener solo números.")
+            print("❌ Email no válido. Por favor, ingresa un email correcto.\n")
+
+    # Validar teléfono fijo
+    while True:
+        telefono_fijo = input("☎️ Ingresa el teléfono fijo: ")
+        if telefono_fijo.isdigit():
+            persona["Telefono"] = {"Fijo": telefono_fijo}
+            break
+        else:
+            print("❌ El teléfono fijo debe contener solo números.\n")
+
+    # Validar teléfono móvil
+    while True:
+        telefono_movil = input("📱 Ingresa el teléfono móvil: ")
+        if telefono_movil.isdigit():
+            persona["Telefono"]["Movil"] = telefono_movil
+            break
+        else:
+            print("❌ El teléfono móvil debe contener solo números.\n")
+
+    # Configuración específica según el tipo de persona
+    if rol == "Candidato":
+        persona["Acudiente"] = input("👨‍👩‍👦 Ingresa el nombre del acudiente: ")
+        persona["Estado"] = "Inscrito"
+    elif rol == "Trainer":
+        persona["Ruta"] = "No asignado"
+        persona["Grupo"] = "No asignado"
+
+    # Guardar datos
+    Datos.Informacion[rol][cedula] = persona
+    Datos.guardar_datos()
+
+    # Confirmación final
+    print("\n" + "="*40)
+    print(f"✅ 📄 Información del {rol.lower()} guardada exitosamente. ✅")
+    print("="*40)
+
+
 
 def Agregar_Ruta_trainer():
     print("***********")

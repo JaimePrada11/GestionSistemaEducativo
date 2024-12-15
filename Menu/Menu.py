@@ -56,7 +56,7 @@ def menu_matricula():
             if opc_c == len(Opc_matricula):
                 return
             elif opc_c == 1:
-                trainer.Registro_trainer()
+                trainer.registro("Trainer")
             elif opc_c == 2:
                 Rutas.Nueva_Ruta()
             elif opc_c == 3:
@@ -136,7 +136,7 @@ def menu_candidato():
             if opc_c == len(Opc_Candidato):
                 return
             elif opc_c == 1:
-                Registro_candidato()
+                trainer.registro("Candidato")
             elif opc_c == 2:
                 info.ver_informacion("Candidato")
             elif opc_c == 3:

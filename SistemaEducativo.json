@@ -1,0 +1,60 @@
+{
+    "Candidato": {
+        "1005155987": {
+            "Nombre": "Jaime ",
+            "Apellidos": "Prada Torres",
+            "Direccion": "Cll 14#12 a 58",
+            "Email": "Jandrespradato.11@gmail.com",
+            "Acudiente": "Sonia Torres",
+            "Telefono": {
+                "Fijo": "6076162539",
+                "Movil": "3011778698"
+            },
+            "Estado": "Inscrito"
+        },
+        "1095957771": {
+            "Nombre": "Nestor",
+            "Apellidos": "Prada",
+            "Direccion": "CLL",
+            "Email": "IVAN@Hotmail.com",
+            "Acudiente": "Sonia",
+            "Telefono": {
+                "Fijo": "3122",
+                "Movil": "1223"
+            },
+            "Estado": "Inscrito"
+        },
+        "12345": {
+            "Nombre": "Wilmer",
+            "Apellidos": "Prada",
+            "Direccion": "cll",
+            "Email": "ja@fm.comm",
+            "Telefono": {
+                "Fijo": "322",
+                "Movil": "234"
+            },
+            "Acudiente": "sonia",
+            "Estado": "Inscrito"
+        }
+    },
+    "Camper": {},
+    "Trainer": {
+        "123456": {
+            "Nombre": "juan",
+            "Apellidos": "mariño",
+            "Direccion": "ps",
+            "Email": "j@d.com",
+            "Telefono": {
+                "Fijo": "23",
+                "Movil": "21"
+            },
+            "Ruta": "No asignado",
+            "Grupo": "No asignado"
+        }
+    },
+    "Rutas": {
+        "Ruta NodeJS": {},
+        "Ruta Java": {},
+        "Ruta NetCore": {}
+    }
+}

@@ -1,3 +1,3 @@
-from Gestion_Trainer.Menu import *
+from Menu.Menu import *
 
 menu_principal()
