@@ -1,12 +1,12 @@
-from Gestion_candidato import *
-import Consulta_Informacion_personal as info
-import Estado 
-import Gestion_Trainer as trainer
-import Rutas
-import Gestion_Camper as camper
-import Reportes 
-import Horarios
-import Trainer_notas as notas
+from Gestion_Camper.Gestion_candidato import *
+import Utilidades.Consulta_Informacion_personal as info
+import Gestion_Coordinacion.Estado as Estado 
+import Gestion_Trainer.Gestion_Trainer as trainer
+import Gestion_Coordinacion.Rutas as Rutas
+import Gestion_Camper.Gestion_Camper as camper
+import Gestion_Reportes.Reportes as Reportes 
+import Gestion_Coordinacion.Horarios as Horarios
+import Gestion_Trainer.Trainer_notas as notas
 
 Opc_Roles = ("1. Candidato", "2. Camper", "3. Trainer", "4. Coordinador", "5. Cerrar sesion")
 

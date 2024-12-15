@@ -1,5 +1,5 @@
-from Manejo_datos import cargar_datos, guardar_datos
-from Datos import Informacion
+from Gestion_Datos.Manejo_datos import cargar_datos, guardar_datos
+from Gestion_Datos.Datos import Informacion
 
 def modificar_Estado_candidato():
     cargar_datos()

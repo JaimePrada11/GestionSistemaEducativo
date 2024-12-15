@@ -1,5 +1,5 @@
-from Manejo_datos import cargar_datos, guardar_datos
-from Datos import *
+from Gestion_Datos.Manejo_datos import cargar_datos, guardar_datos
+from Gestion_Datos.Datos import *
 
 def Mostrar_rutas_entrenamiento():
     cargar_datos()

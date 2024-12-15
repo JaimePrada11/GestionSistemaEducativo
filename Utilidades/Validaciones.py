@@ -1,5 +1,5 @@
 import re
-import Datos
+import Gestion_Datos.Datos as Datos
 
 def validar_email(email):
     pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'

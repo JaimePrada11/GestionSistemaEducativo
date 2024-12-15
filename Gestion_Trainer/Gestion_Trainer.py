@@ -1,6 +1,6 @@
-import Manejo_datos as Datos
-import Validaciones as validar
-from Rutas import mostrar_grupo_ruta
+import Gestion_Datos.Manejo_datos as Datos
+import Utilidades.Validaciones as validar
+from Gestion_Coordinacion.Rutas import mostrar_grupo_ruta
 
 def Registro_trainer():
 

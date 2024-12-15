@@ -1,6 +1,6 @@
-from Manejo_datos import guardar_datos, cargar_datos
-from Datos import Informacion, modulos_skills
-from Rutas import mostrar_grupo_ruta
+from Gestion_Datos.Manejo_datos import guardar_datos, cargar_datos
+from Gestion_Datos.Datos import Informacion, modulos_skills
+from Gestion_Coordinacion.Rutas import mostrar_grupo_ruta
 
 notas_trabajos = {}
 notas = {}
