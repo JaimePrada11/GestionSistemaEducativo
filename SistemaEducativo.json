@@ -1,9 +1,65 @@
 {
-    "Candidato": {},
-    "Camper": {},
+    "Candidato": {
+        "123456": {
+            "Nombre": "jose",
+            "Apellidos": "torres",
+            "Direccion": "toeew",
+            "Email": "ja@gmail.com",
+            "Telefono": {
+                "Fijo": "212",
+                "Movil": "21"
+            },
+            "Acudiente": "aonia",
+            "Estado": "Inscrito"
+        }
+    },
+    "Camper": {
+        "1234": {
+            "Nombre": "ff",
+            "Apellidos": "ff",
+            "Direccion": "ff",
+            "Email": "f@d.com",
+            "Telefono": {
+                "Fijo": "23",
+                "Movil": "23"
+            },
+            "Acudiente": "wdd",
+            "Estado": "Inscrito"
+        }
+    },
     "Trainer": {},
     "Rutas": {
-        "NodeJS": {},
+        "NodeJS": {
+            "U1": {
+                "Módulos": {
+                    "Fundamentos de programacion": [
+                        "Introducción a la algoritmia",
+                        "PSeInt",
+                        "Python"
+                    ],
+                    "Fundamentos web": [
+                        "HTML",
+                        "CSS",
+                        "Bootstrap"
+                    ],
+                    "Programación formal": [
+                        "Java",
+                        "JavaScript",
+                        "C#"
+                    ],
+                    "Bases de datos": [
+                        "Mysql",
+                        "Postgresql"
+                    ],
+                    "Backend": [
+                        "NetCore",
+                        "Spring Boot",
+                        "NodeJS",
+                        "Express"
+                    ]
+                }
+            }
+        },
         "Java": {},
         "NetCore": {},
         "belleza": {}

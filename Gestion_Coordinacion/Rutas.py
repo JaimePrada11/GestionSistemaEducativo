@@ -17,42 +17,59 @@ def Mostrar_rutas_entrenamiento():
 
     print("="*40)
 
+def Mostrar_modulos_skills():
+    print("\n" + "="*40)
+    print("Los módulos actuales son:")
+    print("="*40)
+
+    print(f"| {'#':<4} | {'Módulo':<30} |")
+    print("="*40)
+
+    for i, modulo in enumerate(modulos_skills, 1):
+        for nombre_modulo, tecnologias in modulo.items():
+            print(f"| {i:<4} | {nombre_modulo:<30} |")
+
+    print("="*40)
 
 
-def Nueva_Ruta_entrenamiento():
-    cargar_datos()
-    Mostrar_rutas_entrenamiento()
-
-    opc =input("Desea Crear nueva ruta de entrenamiento? (s/n)").lower()
-
-    if opc =="s":
-        nombre= input("Ingresa el nombre de la nueva ruta")
-        if nombre not in Informacion["Rutas"].keys():
-            Informacion["Rutas"][nombre]={}
-            print(f"La nueva ruta de entrenamiento '{nombre}' ha sido creada exitosamente.")
-            guardar_datos()
-        else:
-            print("La ruta ya estaba creada")
-    elif opc == "n":
-        return
-    else:
-        print("Opcion Invalida")
 
 def seleccion_Ruta_entrenamiento():
     Mostrar_rutas_entrenamiento()
     try:
         Opc = int(input("Selecciona la ruta: "))
-    except ValueError:
-        print("Opcion invalida. Debe ser un numero.")
-    except Exception as error:
-        print(f"Error inesperado : {error} ")
-    else:
         lista_rutas = list(Informacion["Rutas"].keys())
         if 1 <= Opc <= len(lista_rutas):
             ruta_seleccionada = lista_rutas[Opc - 1]
+            print(f"✅ Ruta seleccionada: {ruta_seleccionada}")
             return ruta_seleccionada
         else:
-            print("Opcion invalida")
+            print("❌ Opción inválida. Elige un número dentro del rango de rutas disponibles.")
+
+    except ValueError:
+        print("❌Opcion invalida. Debe ser un numero.")
+    except Exception as error:
+        print(f"🚨 Error inesperado : {error} ")
+        
+def Nueva_Ruta_entrenamiento():
+
+    cargar_datos()
+    Mostrar_rutas_entrenamiento()
+
+    opc = input("¿Desea Crear nueva ruta de entrenamiento? (s/n): ").lower()
+
+    if opc == "s":
+        nombre = input("Ingresa el nombre de la nueva ruta: ")
+        if nombre not in Informacion["Rutas"]:
+            Informacion["Rutas"][nombre] = {}
+            print(f"\n✔ La nueva ruta de entrenamiento '{nombre}' ha sido creada exitosamente.")
+            guardar_datos()
+        else:
+            print("\n❌ La ruta ya estaba creada.")
+    elif opc == "n":
+        return
+    else:
+        print("\n⚠️ Opción inválida. Por favor, ingresa 's' para sí o 'n' para no.")
+
 
 def Crear_grupo_Ruta():
     cargar_datos()
@@ -73,6 +90,9 @@ def Crear_grupo_Ruta():
             print("El nombre del grupo no puede estar vacío.")
     else:
         print("No se seleccionó ninguna ruta.")
+
+
+
 
 def mostrar_grupo_ruta():
     ruta_seleccionada = seleccion_Ruta_entrenamiento()

@@ -26,7 +26,12 @@ def ver_informacion(rol):
             print(f"| {'Ruta':<20} | {participante['Ruta']:<28} |")
             print(f"| {'Grupo':<20} | {participante['Grupo']:<28} |")
         print("\n" + "="*40)
+
+        return cedula
+    
     else:
         print("="*40 + "")
         print(f"\n❌ ¡Error! {rol} no encontrado. ❌\n")
         print("="*40 + "\n")
+
+        return None 

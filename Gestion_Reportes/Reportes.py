@@ -4,27 +4,73 @@ from Gestion_Datos.Datos import Informacion
 
 def Candidatos_Inscritos():
     cargar_datos()
-    print("*** Campers Inscritos ***")
-    for cedula, candidato in Informacion["Candidato"].items():
-        if candidato["Estado"] == "Inscrito":
-            print("----")
+
+    print("\n" + "="*40)
+    print("Candidatos Inscritos")
+    print("="*40)
+
+    print(f"| {'#':<4} | {'Cédula':<15} | {'Nombre':<25} | {'Estado':<10} |")
+    print("="*40)
+
+    inscritos = [cedula for cedula, 
+                 candidato in Informacion["Candidato"].items() 
+                 if candidato["Estado"] == "Inscrito"]
+
+    for i, cedula in enumerate(inscritos, 1):
+        candidato = Informacion["Candidato"][cedula]
+        nombre = candidato.get('Nombre', 'N/A')
+        estado = candidato.get('Estado', 'N/A')
+        print(f"| {i:<4} | {cedula:<15} | {nombre:<25} | {estado:<10} |")
+
+    print("="*40)
 
 
 def Campers_Aprobados():
-    print("*** Campers Aprobados en el Examen Inicial ***")
-    for cedula, camper in Informacion["Camper"].items():
-            if camper["Estado"] == "Aprobado":
-                print(f"Cédula: {cedula}, Nombre: {camper['Nombre']} {camper['Apellidos']}")
+    cargar_datos()
+
+    print("\n" + "="*40)
+    print("Campers Aprobados en el Examen Inicial")
+    print("="*40)
+
+    print(f"| {'#':<4} | {'Cédula':<15} | {'Nombre':<25} |")
+    print("="*40)
+
+    aprobados = [cedula for cedula, camper in Informacion["Camper"].items() if camper["Estado"] == "Aprobado"]
+    
+    for i, cedula in enumerate(aprobados, 1):
+        camper = Informacion["Camper"][cedula]
+        nombre = camper.get('Nombre', 'N/A')
+        apellidos = camper.get('Apellidos', 'N/A')
+        print(f"| {i:<4} | {cedula:<15} | {nombre} {apellidos:<25} |")
+
+    print("="*40)
+
 
 
 def listar_trainers_activos():
-    print("*** Trainers Activos ***")
-    for cedula, trainer in Informacion["Trainer"].items():
-        print(f"Cédula: {cedula}, Nombre: {trainer['Nombre']} {trainer['Apellidos']}")
+    cargar_datos()
+
+    print("\n" + "="*40)
+    print("Trainers Activos")
+    print("="*40)
+
+    print(f"| {'#':<4} | {'Cédula':<15} | {'Nombre':<25} |")
+    print("="*40)
+
+    activos = [cedula for cedula, trainer in Informacion["Trainer"].items() if trainer["Estado"] == True] 
+    
+    for i, cedula in enumerate(activos, 1):
+        trainer = Informacion["Trainer"][cedula]
+        nombre = trainer.get('Nombre', 'N/A')
+        apellidos = trainer.get('Apellidos', 'N/A')
+        print(f"| {i:<4} | {cedula:<15} | {nombre} {apellidos:<25} |")
+
+    print("="*40)
 
 
 
 def camper_trainer_misma_ruta():
+    
     ruta_grupo = mostrar_grupo_ruta()
     if ruta_grupo:
         ruta, grupo = ruta_grupo

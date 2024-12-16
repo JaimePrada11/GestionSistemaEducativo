@@ -14,8 +14,8 @@ modulos_skills = [
     {"Programación formal":["Java", "JavaScript", "C#"]},
     {"Bases de datos":["Mysql", "MongoDb" , "Postgresql"]},
     {"Backend":["NetCore", "Spring Boot", "NodeJS", "Express"]}
-] 
+]
 
-Salon = ("Sputnik", "Apollo", "Artemis")
+Salon =  ["Sputnik", "Apollo", "Artemis"]
 
 Horas = ["6am-10am", "10am-2pm", "2pm-6pm", "6pm-10pm"]
