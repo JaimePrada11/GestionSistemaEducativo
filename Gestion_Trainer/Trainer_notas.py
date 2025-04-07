@@ -1,6 +1,6 @@
 from Gestion_Datos.Manejo_datos import guardar_datos, cargar_datos
 from Gestion_Datos.Datos import Informacion, modulos_skills
-from Gestion_Coordinacion.Rutas import mostrar_grupo_ruta
+""" from Gestion_Coordinacion.Rutas import mostrar_grupo_ruta
 
 notas_trabajos = {}
 notas = {}
@@ -111,3 +111,4 @@ def seguir_progreso_calificacion(cedula, modulos_skills):
                 return
         if input("¿Desea calificar el siguiente módulo? (s/n): ").lower() != 's':
             return
+ """

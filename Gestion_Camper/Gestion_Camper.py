@@ -1,9 +1,8 @@
 from Gestion_Datos.Manejo_datos import cargar_datos, guardar_datos
 from Gestion_Datos.Datos import Informacion
 
-from Gestion_Coordinacion.Rutas import  mostrar_grupo_ruta
 
-def Agregar_Ruta_camper():
+""" def Agregar_Ruta_camper():
     print("***********")
     cargar_datos()
 
@@ -17,10 +16,8 @@ def Agregar_Ruta_camper():
         if Informacion["Camper"][cedula]["Ruta"] == "No asignada":
             Ruta, grupo_seleccionado = mostrar_grupo_ruta()
             if grupo_seleccionado:
-                Informacion["Camper"][cedula]["Ruta"] = Ruta
                 Informacion["Camper"][cedula]["Grupo"] = grupo_seleccionado
                 Informacion["Camper"][cedula]["Estado"] = "Cursando"
-                print(f"El Camper de cédula {cedula} se asignó al grupo {grupo_seleccionado} en la ruta {Ruta}.")
             else:
                 print("No se asignó ningún grupo al Camper.")
         else:
@@ -41,5 +38,5 @@ def Rutas_asignadas():
         print(f"Ruta: {camper['Ruta']} 'Grupo:' {camper['Grupo']}")
     else:
         print("No se encontró ningún entrenador con esa cedula.")
-
+ """
 

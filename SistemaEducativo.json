@@ -1,67 +1,45 @@
 {
-    "Candidato": {
-        "123456": {
-            "Nombre": "jose",
-            "Apellidos": "torres",
-            "Direccion": "toeew",
-            "Email": "ja@gmail.com",
-            "Telefono": {
-                "Fijo": "212",
-                "Movil": "21"
-            },
-            "Acudiente": "aonia",
-            "Estado": "Inscrito"
-        }
-    },
-    "Camper": {
-        "1234": {
-            "Nombre": "ff",
-            "Apellidos": "ff",
-            "Direccion": "ff",
-            "Email": "f@d.com",
-            "Telefono": {
-                "Fijo": "23",
-                "Movil": "23"
-            },
-            "Acudiente": "wdd",
-            "Estado": "Inscrito"
-        }
-    },
+    "Candidato": {},
+    "Camper": {},
     "Trainer": {},
     "Rutas": {
         "NodeJS": {
             "U1": {
                 "Módulos": {
-                    "Fundamentos de programacion": [
-                        "Introducción a la algoritmia",
-                        "PSeInt",
+                    "Fundamentos de programación": {
+                        "Tecnología 1": "HTML",
+                        "Tecnología 2": "CSS",
+                        "Tecnología 3": "Bootstrap"
+                    },
+                    "Fundamentos web": {
+                        "Tecnología 1": "Java",
+                        "Tecnología 2": "JavaScript",
+                        "Tecnología 3": "C#"
+                    }
+                }
+            },
+            "K1": {
+                "Módulos": {}
+            }
+        },
+        "Java": {
+            "a1": {
+                "Módulos": {
+                    "Fundamentos de programación": [
                         "Python"
                     ],
                     "Fundamentos web": [
                         "HTML",
-                        "CSS",
-                        "Bootstrap"
-                    ],
-                    "Programación formal": [
-                        "Java",
-                        "JavaScript",
-                        "C#"
+                        "CSS"
                     ],
                     "Bases de datos": [
-                        "Mysql",
-                        "Postgresql"
-                    ],
-                    "Backend": [
-                        "NetCore",
-                        "Spring Boot",
-                        "NodeJS",
-                        "Express"
+                        "MySQL"
                     ]
                 }
             }
         },
-        "Java": {},
         "NetCore": {},
-        "belleza": {}
+        ".NET": {},
+        "NETCORE": {}
     }
 }

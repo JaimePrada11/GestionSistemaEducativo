@@ -2,9 +2,9 @@ from Gestion_Datos.Datos import *
 from Gestion_Datos.Manejo_datos import *
 import Utilidades.Validaciones as validar
 from Utilidades.Consulta_Informacion_personal import *
-from Gestion_Coordinacion.Rutas import mostrar_grupo_ruta
+from Gestion_Coordinacion.Rutas import *
 
-
+""" 
 def Agregar_Ruta_trainer():
     print("***********")
     cargar_datos()
@@ -12,10 +12,9 @@ def Agregar_Ruta_trainer():
     cedula = input("Ingresa la cédula del Trainer: ")
     
     if cedula  in Informacion["Trainer"]:       
-        if Informacion["Trainer"][cedula]["Ruta"] == "No asignado":
+        if Informacion["Trainer"][cedula]["Grupo"] == None:
             Ruta, grupo_seleccionado = mostrar_grupo_ruta()
             if grupo_seleccionado:
-                Informacion["Trainer"][cedula]["Ruta"] = Ruta
                 Informacion["Trainer"][cedula]["Grupo"] = grupo_seleccionado
                 print(f"El Trainer de cédula {cedula} se asignó al grupo {grupo_seleccionado} en la ruta {Ruta}.")
             else:
@@ -38,3 +37,4 @@ def Rutas_asignadas():
         print(f"Ruta: {trainer['Ruta']} 'Grupo:' {trainer['Grupo']}")
     else:
         print("No se encontró ningún entrenador con esa cedula.")
+ """

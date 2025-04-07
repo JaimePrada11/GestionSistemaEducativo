@@ -1,5 +1,4 @@
 from Gestion_Datos.Manejo_datos import cargar_datos, guardar_datos
-from Gestion_Coordinacion.Rutas import mostrar_grupo_ruta
 from Gestion_Datos.Datos import Informacion
 
 def Candidatos_Inscritos():
@@ -67,7 +66,7 @@ def listar_trainers_activos():
 
     print("="*40)
 
-
+""" 
 
 def camper_trainer_misma_ruta():
     
@@ -106,3 +105,4 @@ def reporte_por_modulo():
                         nota_final = notas_tecnologia.get("Nota Final", "Nota Final no encontrada")
                         print(f"Cédula: {cedula}, Nombre: {camper['Nombre']} {camper['Apellidos']}, Tecnología: {tecnologia}, Nota Final: {nota_final}")
         print("\n")
+ """

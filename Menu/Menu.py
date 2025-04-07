@@ -58,13 +58,13 @@ def menu_matricula():
             elif opc_c == 1:
                 trainer.actualizar_usuario("Trainer")
             elif opc_c == 2:
-                Rutas.Nueva_Ruta_entrenamiento()
+                Rutas.nueva_ruta_entrenamiento()
             elif opc_c == 3:
-                Rutas.Crear_grupo_Ruta()   
+                Rutas.crear_grupo_ruta() 
             elif opc_c == 4:
                 menu_asignar()    
             elif opc_c == 5:
-                Rutas.Agregar_modulos_ruta() 
+                Rutas.agregar_modulos_ruta()
             elif opc_c == 6:
                 Horarios.asignar_fecha()                                    
             else:

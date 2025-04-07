@@ -2,7 +2,6 @@ from Gestion_Datos.Manejo_datos import *
 from Gestion_Datos.Datos import *
 
 def Mostrar_rutas_entrenamiento():
-
     cargar_datos()
 
     print("\n" + "="*40)
@@ -17,22 +16,6 @@ def Mostrar_rutas_entrenamiento():
 
     print("="*40)
 
-def Mostrar_modulos_skills():
-    print("\n" + "="*40)
-    print("Los módulos actuales son:")
-    print("="*40)
-
-    print(f"| {'#':<4} | {'Módulo':<30} |")
-    print("="*40)
-
-    for i, modulo in enumerate(modulos_skills, 1):
-        for nombre_modulo, tecnologias in modulo.items():
-            print(f"| {i:<4} | {nombre_modulo:<30} |")
-
-    print("="*40)
-
-
-
 def seleccion_Ruta_entrenamiento():
     Mostrar_rutas_entrenamiento()
     try:
@@ -46,12 +29,12 @@ def seleccion_Ruta_entrenamiento():
             print("❌ Opción inválida. Elige un número dentro del rango de rutas disponibles.")
 
     except ValueError:
-        print("❌Opcion invalida. Debe ser un numero.")
+        print("❌ Opción inválida. Debe ser un número.")
     except Exception as error:
         print(f"🚨 Error inesperado : {error} ")
-        
-def Nueva_Ruta_entrenamiento():
+        return None
 
+def Nueva_Ruta_entrenamiento():
     cargar_datos()
     Mostrar_rutas_entrenamiento()
 
@@ -70,159 +53,219 @@ def Nueva_Ruta_entrenamiento():
     else:
         print("\n⚠️ Opción inválida. Por favor, ingresa 's' para sí o 'n' para no.")
 
-
 def Crear_grupo_Ruta():
     cargar_datos()
-    nv_ruta = {"Módulos": {}}
+    
     ruta_seleccionada = seleccion_Ruta_entrenamiento()
     
     if ruta_seleccionada:
-        grupo = input("Ingresa el nombre del grupo: ")
-        if grupo:
-            for ruta, grupos in Informacion["Rutas"].items():
-                if grupo in grupos:
-                    print(f"El grupo {grupo} ya existe en la ruta '{ruta}' ")
-                    return
-                
-            Informacion["Rutas"][ruta_seleccionada][grupo] = nv_ruta
-            guardar_datos()
-        else:
-            print("El nombre del grupo no puede estar vacío.")
+        grupo = input("Ingresa el nombre del grupo: ").strip()
+        
+        if not grupo:
+            print("❌ El nombre del grupo no puede estar vacío.")
+            return
+        
+        if grupo in Informacion["Rutas"][ruta_seleccionada]:
+            print(f"❌ El grupo '{grupo}' ya existe en la ruta '{ruta_seleccionada}'.")
+            return
+        
+        Informacion["Rutas"][ruta_seleccionada][grupo] = {"Módulos": {}}
+        guardar_datos()
+        
+        print(f"\n✔ El grupo '{grupo}' ha sido creado exitosamente en la ruta '{ruta_seleccionada}'.")
     else:
-        print("No se seleccionó ninguna ruta.")
+        print("❌ No se seleccionó ninguna ruta para crear el grupo.")
 
-
-
-
-def mostrar_grupo_ruta():
+def mostrar_grupos_ruta():
     ruta_seleccionada = seleccion_Ruta_entrenamiento()
     if ruta_seleccionada:
         print(f"Los Grupos en la ruta '{ruta_seleccionada}':")
         grupos = Informacion["Rutas"][ruta_seleccionada].keys()
+
         if not grupos:
             print("No hay grupos en esta ruta.")
             return None
-            
-        grupo_seleccionado = None
-        for i, grupo in enumerate(grupos, 1):
-            print(f"{i}. {grupo}")
+        
+        print("\n" + "="*40)
+        print(f"| {'#':<4} | {'Grupo':<30} |")
+        print("="*40)
 
+        for i, grupo in enumerate(grupos, 1):
+            print(f"| {i:<4} | {grupo:<30} |")
+
+        print("="*40)
+        return grupos, ruta_seleccionada
+
+    else:
+        print("No se seleccionó ninguna ruta.")
+        return None, None
+
+def seleccionar_grupo():
+    grupos, ruta_seleccionada  = mostrar_grupos_ruta()
+
+    if grupos:
         try:
             opc_grupo = int(input("Selecciona el número del grupo: "))
             if 1 <= opc_grupo <= len(grupos):
                 grupo_seleccionado = list(grupos)[opc_grupo - 1]
+                return grupo_seleccionado, ruta_seleccionada
             else:
-                print("Opción inválida")
+                print("❌ Opción inválida. Elige un número dentro del rango de grupos disponibles.")
         except ValueError:
-            print("Entrada inválida. Ingresa un número.")
+            print("❌ Entrada inválida. Debe ingresar un número.")
         
-        if grupo_seleccionado:
-            return ruta_seleccionada, grupo_seleccionado
-        else:
-            print("No se seleccionó ningún grupo.")
-            return None
-        
-def Seleccionar_SGDB():
-    cargar_datos()
-    Base_Datos = []
-    SGDB_lista = modulos_skills[3]["Bases de datos"].copy()
+    print("❌ No se seleccionó ningún grupo.")
+    return None, None
 
-    for tipo in ["Principal", "Alternativo"]:
+def mostrar_opciones_SGDB(tipo):
+    SGDB_lista = modulos_skills["Bases de datos"].copy()
+    print("\n" + "="*40)
+    print(f"Selecciona el SGDB {tipo}:")
+    print("="*40)
+    
+    for i, valor in enumerate(SGDB_lista, 1):
+        print(f"{i}. {valor}")
+    print("="*40)
+
+    return SGDB_lista
+
+def Seleccionar_SGDB():
+    Base_Datos = []
+    tipos_SGDB = ["Principal", "Alternativo"]
+
+    print("\n" + "="*40)
+    print("Seleccionar SGBD:")
+    print("="*40)
+
+    for tipo in tipos_SGDB:
         while True:
-            print("***********")
-            print(f"Selecciona el SGDB {tipo}:")
-            for i, valor in enumerate(SGDB_lista, 1):
-                print(f"{i}. {valor}")
-            print("***********")
             try:
+                opciones = mostrar_opciones_SGDB(tipo)
                 opc_SGDB = int(input(f"Ingrese el número del SGDB {tipo}: "))
             except ValueError:
-                print("Error: Por favor ingresa un número válido.")
+                print("❌ Error: Por favor ingresa un número válido.")
                 continue
             except Exception:
-                print("Error inesperado")
+                print("❌ Error inesperado.")
+                continue
 
-            if 1 <= opc_SGDB <= len(SGDB_lista):
-                SGDB_seleccionado = SGDB_lista.pop(opc_SGDB - 1)
+            if 1 <= opc_SGDB <= len(opciones):
+                SGDB_seleccionado = opciones.pop(opc_SGDB - 1)
                 Base_Datos.append(SGDB_seleccionado)
                 print(f"SGDB {tipo} seleccionado: {SGDB_seleccionado}")
                 break
             else:
-                print("Opción inválida. Por favor selecciona una opción dentro del rango.")
+                print("❌ Opción inválida. Por favor selecciona una opción dentro del rango.")
+
+    print("\n" + "="*40)
+    print("SGBD Seleccionados:")
+    print("="*40)
+
+    print(f"| {'#':<4} | {'SGDB':<20} |")
+    print("="*28)
+    for i, sgdb in enumerate(Base_Datos, 1):
+        print(f"| {i:<4} | {sgdb:<20} |")
+    print("="*28)
+
     return Base_Datos
 
 def mostrar_modulos():
-    print("*********")
-    print("Módulos disponibles---->")
-    for i, mod in enumerate(modulos_skills, 1):
-        for llave in mod:
-            print(f"{i}. {llave}")
-    print("*********")
+    print("\n" + "="*40)
+    print("Opciones de módulos:")
+    print("="*40)
+
+    for idx, modulo in enumerate(modulos_skills.keys(), 1):
+        print(f"{idx}. {modulo}")
+    print("="*40)
+
+def tecnologias_modulo():
+    mostrar_modulos()
+    
+    try:
+        modulo_seleccionado = int(input("Selecciona el número del módulo: "))
+
+        modulo = list(modulos_skills.keys())[modulo_seleccionado - 1]
+        tecnologias = modulos_skills[modulo]
+        
+        if not tecnologias:
+            print(f"No se han encontrado tecnologías para el módulo '{modulo}'.")
+            return []
+        
+        print(f"Tecnologías para el módulo '{modulo}':")
+        print("="*40)
+
+        for i, tech in enumerate(tecnologias, 1):
+            print(f"{i}. {tech}")
+        print("="*40)
+
+        return tecnologias
+
+    except (ValueError, IndexError):
+        print("❌ Opción inválida.")
+        return []
+
+
+def seleccionar_modulo():
+    print("\n" + "="*40)
+    print("Seleccionar Módulo:")
+    print("="*40)
+
+    mostrar_modulos()
 
     try:
-        opc = int(input("Selecciona el módulo: "))
-    except ValueError:
-        print("Ingresa un número válido")
-        return None
-    else:
-        if not (1 <= opc <= len(modulos_skills)):
-            print("Opción inválida")
-            return None
-    
-    for i, mod in enumerate(modulos_skills, 1):
-        if i == opc:
-            mod_seleccionado = {}
-            for modulo_nombre, tecnologias in mod.items():
-                print(f"Modulo: {modulo_nombre}")
-                print("Tecnologías:")
-                if modulo_nombre == "Bases de datos":
-                    sgdb_seleccionados = Seleccionar_SGDB()
-                    mod_seleccionado[modulo_nombre] = sgdb_seleccionados
-                else:
-                    for tecnologia in tecnologias:
-                        print(f"- {tecnologia}")
-                    mod_seleccionado[modulo_nombre] = tecnologias
-            return mod_seleccionado
+        modulo_seleccionado = int(input("Selecciona el número del módulo que deseas: "))
 
-    return None
+        if 1 <= modulo_seleccionado <= len(modulos_skills):
+            modulo = list(modulos_skills.keys())[modulo_seleccionado - 1]
+            print(f"Modulación seleccionada: {modulo}")
+            return modulo
+        else:
+            print("❌ Selección inválida. Por favor ingresa un número válido.")
+            return None
+
+    except ValueError:
+        print("❌ Entrada no válida. Por favor ingresa un número.")
+        return None
+
+
+
 
 def Agregar_modulos_ruta():
     cargar_datos()
-    print("***")
-    print("Las actuales rutas de entrenamiento son: ")
-    for i, ruta in enumerate(Informacion["Rutas"].keys(), 1):
-        print(f"{i}. {ruta}")
+    grupo_seleccionado, ruta_seleccionada  = seleccionar_grupo()
 
-    try:
-        opc = int(input("Selecciona la Ruta a la que deseas agregar sus módulos: "))
-        lista_rutas = list(Informacion["Rutas"].keys())
-        if 1 <= opc <= len(lista_rutas):
-            ruta_seleccionada = lista_rutas[opc - 1]
+    if grupo_seleccionado:
+
+        if ruta_seleccionada:
+            if ruta_seleccionada not in Informacion["Rutas"]:
+                Informacion["Rutas"][ruta_seleccionada] = {}
+
+            if grupo_seleccionado not in Informacion["Rutas"][ruta_seleccionada]:
+                Informacion["Rutas"][ruta_seleccionada][grupo_seleccionado] = {"Módulos": {}}
+
+            modulo_seleccionado = seleccionar_modulo()
+
+            if modulo_seleccionado:
+                Informacion["Rutas"][ruta_seleccionada][grupo_seleccionado]["Módulos"][modulo_seleccionado] = {}
+
+                print(f"✔ Módulo '{modulo_seleccionado}' agregado al grupo '{grupo_seleccionado}' en la ruta '{ruta_seleccionada}'.")
+
+                tecnologias_seleccionadas = tecnologias_modulo()
+            while True:
+                if tecnologias_seleccionadas:
+                    Informacion["Rutas"][ruta_seleccionada][grupo_seleccionado]["Módulos"][modulo_seleccionado].update(tecnologias_seleccionadas)
+                    print("✔ Tecnologías seleccionadas agregadas al módulo.")
+
+                continuar = input("¿Deseas agregar otro módulo a esta ruta? (s/n): ").lower()
+                if continuar != 's':
+                     break
+                else:
+                    print("⚠️ No se seleccionaron tecnologías para el módulo.")
+
+                guardar_datos()
+            else:
+                print("❌ No se seleccionó ningún módulo.")
         else:
-            print("Opción inválida")
-            return
-    except ValueError:
-        print("Ingresa un número válido")
-        return
-
-    identificador = input("Ingresa el nombre del grupo dentro de la ruta: ")
-    if identificador not in Informacion["Rutas"][ruta_seleccionada]:
-        print(f"No se encontró el grupo '{identificador}' en la ruta seleccionada.")
-        return
-
-    if "Módulos" not in Informacion["Rutas"][ruta_seleccionada][identificador]:
-        Informacion["Rutas"][ruta_seleccionada][identificador]["Módulos"] = {}
-
-    while True:
-        mod = mostrar_modulos()
-        if mod:
-            Informacion["Rutas"][ruta_seleccionada][identificador]["Módulos"].update(mod)
-            guardar_datos()
-        continuar = input("¿Deseas agregar otro módulo a esta ruta? (s/n): ").lower()
-        if continuar != 's':
-            break
-
-
-
-
-
+            print("❌ No se seleccionó ninguna ruta.")
+    else:
+        print("❌ No se seleccionó ningún grupo.")

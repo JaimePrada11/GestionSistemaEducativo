@@ -1,6 +1,6 @@
 from Gestion_Datos.Manejo_datos import cargar_datos, guardar_datos
 from Gestion_Datos.Datos import *
-
+""" 
 from Gestion_Coordinacion.Rutas import mostrar_grupo_ruta
 from datetime import datetime, timedelta
 
@@ -111,3 +111,4 @@ def asignar_fecha():
         print("No se seleccionó una ruta válida.")
 
 
+ """
