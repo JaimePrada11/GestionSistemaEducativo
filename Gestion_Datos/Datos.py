@@ -5,7 +5,8 @@ Informacion = {"Candidato": {},
                    "NodeJS": {}, 
                    "Java": {},
                    "NetCore": {}
-                   }
+                   },
+                "Notas":[] 
                }
 
 modulos_skills = {
@@ -15,9 +16,6 @@ modulos_skills = {
     "Bases de datos": ["MySQL", "MongoDB", "PostgreSQL"],
     "Backend": ["NetCore", "Spring Boot", "NodeJS", "Express"]
 }
-
-
-
 
 
 Salon =  ["Sputnik", "Apollo", "Artemis"]

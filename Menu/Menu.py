@@ -7,6 +7,7 @@ import Gestion_Camper.Gestion_Camper as camper
 import Gestion_Reportes.Reportes as Reportes 
 import Gestion_Coordinacion.Horarios as Horarios
 import Gestion_Trainer.Trainer_notas as notas
+import Gestion_Coordinacion.Usuario as Usuario
 
 Opc_Roles = ("1. Candidato", "2. Camper", "3. Trainer", "4. Coordinador", "5. Cerrar sesion")
 
@@ -56,7 +57,7 @@ def menu_matricula():
             if opc_c == len(Opc_matricula):
                 return
             elif opc_c == 1:
-                trainer.actualizar_usuario("Trainer")
+                Usuario.registro("Trainer")
             elif opc_c == 2:
                 Rutas.nueva_ruta_entrenamiento()
             elif opc_c == 3:
@@ -136,7 +137,7 @@ def menu_candidato():
             if opc_c == len(Opc_Candidato):
                 return
             elif opc_c == 1:
-                trainer.actualizar_usuario("Candidato")
+                Usuario.registro("Candidato")
             elif opc_c == 2:
                 info.ver_informacion("Candidato")
             elif opc_c == 3:

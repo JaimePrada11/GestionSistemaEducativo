@@ -7,10 +7,9 @@ from Utilidades.Consulta_Informacion_personal import *
 def obtener_rol(cedula):
     cargar_datos()
     for rol, usuarios in Informacion.items():
-        if cedula in usuarios:
+      if isinstance(usuarios, dict) and cedula in usuarios:
             return rol
-
-    return f"No se encontró un rol asociado a la cedula '{cedula}'."
+    return None 
 
 def registro(rol):
 

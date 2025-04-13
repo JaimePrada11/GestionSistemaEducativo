@@ -1,45 +1,37 @@
 {
-    "Candidato": {},
-    "Camper": {},
-    "Trainer": {},
-    "Rutas": {
-        "NodeJS": {
-            "U1": {
-                "Módulos": {
-                    "Fundamentos de programación": {
-                        "Tecnología 1": "HTML",
-                        "Tecnología 2": "CSS",
-                        "Tecnología 3": "Bootstrap"
-                    },
-                    "Fundamentos web": {
-                        "Tecnología 1": "Java",
-                        "Tecnología 2": "JavaScript",
-                        "Tecnología 3": "C#"
-                    }
-                }
+    "Candidato": {
+        "1005155987": {
+            "Nombre": "jaime",
+            "Apellidos": "prada",
+            "Direccion": "cll 14 #12 a 58",
+            "Email": "jandrespradato.11@gmail.com",
+            "Telefono": {
+                "Fijo": "6076165432",
+                "Movil": "3011778698"
             },
-            "K1": {
-                "Módulos": {}
-            }
-        },
-        "Java": {
-            "a1": {
-                "Módulos": {
-                    "Fundamentos de programación": [
-                        "Python"
-                    ],
-                    "Fundamentos web": [
-                        "HTML",
-                        "CSS"
-                    ],
-                    "Bases de datos": [
-                        "MySQL"
-                    ]
-                }
-            }
-        },
-        "NetCore": {},
-        ".NET": {},
-        "NETCORE": {}
-    }
+            "Acudiente": "sonia",
+            "Estado": "Inscrito"
+        }
+    },
+    "Camper": {},
+    "Trainer": {
+        "1095957771": {
+            "Nombre": "juan ",
+            "Apellidos": "perez",
+            "Direccion": "Bucaramanga",
+            "Email": "juan@preex.com",
+            "Telefono": {
+                "Fijo": "3033131",
+                "Movil": "3131231"
+            },
+            "Estado": true,
+            "Grupo": []
+        }
+    },
+    "Rutas": {
+        "NodeJS": {},
+        "Java": {},
+        "NetCore": {}
+    },
+    "Notas": []
 }
